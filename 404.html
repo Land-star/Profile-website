@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Execute Order 404</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap');
+
+  :root {
+    --bg: #020409;
+    --cyan: #00f5ff;
+    --green: #00ff88;
+    --red: #ff2244;
+    --text: #c8e0f0;
+    --glow-cyan: 0 0 20px rgba(0,245,255,0.5), 0 0 60px rgba(0,245,255,0.2);
+    --glow-red: 0 0 20px rgba(255,34,68,0.6), 0 0 60px rgba(255,34,68,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Share Tech Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: crosshair;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px
+    );
+    pointer-events: none;
+    z-index: 99;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,245,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,245,255,0.025) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  
+  .side-art.left  { left: 0; }
+  .side-art.right { right: 0; transform: scaleX(-1); }
+
+  .side-art svg { width: 100%; height: 100%; overflow: visible; }
+
+  @keyframes rotateSlow { to { transform: rotate(360deg); } }
+  @keyframes rotateRev  { to { transform: rotate(-360deg); } }
+  @keyframes fadePulse  { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+  /* ===== CENTER ===== */
+  .container {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem;
+    max-width: 560px;
+  }
+
+  .error-code {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(7rem, 20vw, 13rem);
+    font-weight: 900;
+    color: var(--red);
+    text-shadow: var(--glow-red);
+    line-height: 1;
+    position: relative;
+    animation: glitch 5s infinite;
+    letter-spacing: -0.02em;
+  }
+
+  .error-code::before, .error-code::after {
+    content: '404';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+  }
+  .error-code::before {
+    color: var(--cyan); opacity: 0.6;
+    animation: glitch-top 5s infinite;
+    clip-path: polygon(0 0,100% 0,100% 38%,0 38%);
+  }
+  .error-code::after {
+    color: var(--green); opacity: 0.4;
+    animation: glitch-bot 5s infinite;
+    clip-path: polygon(0 62%,100% 62%,100% 100%,0 100%);
+  }
+
+  @keyframes glitch {
+    0%,88%,100% { transform:translate(0); }
+    90%  { transform:translate(-3px, 1px); }
+    92%  { transform:translate(3px,-1px); }
+    94%  { transform:translate(-2px,2px); }
+    96%  { transform:translate(2px,-2px); }
+    98%  { transform:translate(0); }
+  }
+  @keyframes glitch-top {
+    0%,88%,100% { transform:translate(0); }
+    90% { transform:translate(5px,0); }
+    93% { transform:translate(-5px,0); }
+    96% { transform:translate(2px,0); }
+  }
+  @keyframes glitch-bot {
+    0%,88%,100% { transform:translate(0); }
+    90% { transform:translate(-5px,0); }
+    93% { transform:translate(5px,0); }
+    96% { transform:translate(-2px,0); }
+  }
+
+  .order-line {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(0.85rem, 2.2vw, 1.15rem);
+    font-weight: 700;
+    color: var(--cyan);
+    text-shadow: var(--glow-cyan);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin: 1.5rem 0 1rem;
+    animation: fadeIn 0.8s ease 0.3s both;
+  }
+
+  .divider {
+    display: flex; align-items: center; gap: 1rem;
+    margin: 0.5rem auto 1.5rem;
+    animation: fadeIn 0.8s ease 0.45s both;
+  }
+  .divider::before, .divider::after {
+    content: ''; flex: 1; height: 1px;
+    background: rgba(0,245,255,0.18);
+  }
+  .divider span {
+    font-size: 0.6rem; letter-spacing: 0.3em;
+    color: rgba(0,245,255,0.35);
+  }
+
+  .subtitle {
+    font-size: clamp(0.75rem, 1.8vw, 0.92rem);
+    color: rgba(200,224,240,0.5);
+    letter-spacing: 0.18em;
+    line-height: 2;
+    margin-bottom: 2.5rem;
+    animation: fadeIn 0.8s ease 0.6s both;
+  }
+
+  .back-btn {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 0.9rem 2rem;
+    background: transparent; color: var(--cyan);
+    border: 1px solid var(--cyan);
+    text-decoration: none; text-transform: uppercase;
+    position: relative; overflow: hidden;
+    transition: color 0.3s;
+    clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);
+    display: inline-block;
+    animation: fadeIn 0.8s ease 0.8s both;
+  }
+  .back-btn::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--cyan);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s; z-index: -1;
+  }
+  .back-btn:hover { color: var(--bg); }
+  .back-btn:hover::before { transform: scaleX(1); }
+
+  .particles { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+  .particle {
+    position: absolute; width: 2px; height: 2px;
+    background: var(--cyan); border-radius: 50%;
+    opacity: 0; animation: floatUp linear infinite;
+  }
+
+  @keyframes floatUp {
+    0%   { transform:translateY(100vh); opacity:0; }
+    10%  { opacity:0.5; }
+    90%  { opacity:0.2; }
+    100% { transform:translateY(-5vh); opacity:0; }
+  }
+  @keyframes fadeIn {
+    from { opacity:0; transform:translateY(14px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="particles" id="particles"></div>
+
+<!-- CENTER CONTENT -->
+<div class="container">
+  <div class="error-code">404</div>
+  <div class="order-line">EXECUTE ORDER 404</div>
+  <div class="divider"><span>// page not found //</span></div>
+  <p class="subtitle">
+    OR WAS IT 66? ANYWAY...<br>
+    THIS IS NOT THE WEBPAGE YOU ARE LOOKING FOR.
+  </p>
+  <a href="/" class="back-btn">⟵ &nbsp; Return to Base</a>
+</div>
+
+<script>
+  const pc = document.getElementById('particles');
+  for (let i = 0; i < 25; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (7 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 12) + 's';
+    if (Math.random() > 0.7)  p.style.background = '#00ff88';
+    if (Math.random() > 0.92) p.style.background = '#ff2244';
+    pc.appendChild(p);
+  }
+</script>
+
+</body>
+</html>

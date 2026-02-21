@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KIERAN — Projects</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;500;700&family=Orbitron:wght@400;700;900&display=swap');
+
+  :root {
+    --bg: #020409;
+    --surface: #070d18;
+    --cyan: #00f5ff;
+    --green: #00ff88;
+    --red: #ff2244;
+    --dim: #0a1628;
+    --border: rgba(0,245,255,0.15);
+    --text: #c8e0f0;
+    --glow-cyan: 0 0 20px rgba(0,245,255,0.5), 0 0 60px rgba(0,245,255,0.2);
+    --glow-green: 0 0 20px rgba(0,255,136,0.5);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4rem;
+    height: 68px;
+    background: rgba(2,4,9,0.92);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+  }
+
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 1.3rem;
+    color: var(--cyan);
+    text-shadow: var(--glow-cyan);
+    letter-spacing: 0.2em;
+    text-decoration: none;
+  }
+  .logo span { color: rgba(200,224,240,0.3); font-weight: 300; font-size: 0.85rem; }
+
+  .nav-links {
+    display: flex; gap: 2.5rem;
+    list-style: none;
+    font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .nav-links a {
+    color: rgba(200,224,240,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px; background: var(--cyan);
+    transform: scaleX(0); transition: transform 0.2s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-links a.active { color: var(--cyan); }
+  .nav-links a.active::after { transform: scaleX(1); }
+
+  .nav-cta {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 0.55rem 1.4rem;
+    border: 1px solid var(--cyan);
+    color: var(--cyan); background: transparent;
+    text-decoration: none; text-transform: uppercase;
+    position: relative; overflow: hidden;
+    transition: color 0.3s;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  }
+  .nav-cta::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--cyan);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s; z-index: -1;
+  }
+  .nav-cta:hover { color: var(--bg); }
+  .nav-cta:hover::before { transform: scaleX(1); }
+
+  /* ===== MOBILE NAV ===== */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 210;
+    padding: 4px;
+  }
+  .hamburger span {
+    width: 22px; height: 1.5px;
+    background: var(--cyan);
+    transition: all 0.3s;
+    display: block;
+  }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 68px; right: 0;
+    background: rgba(7,13,24,0.97);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-top: none;
+    z-index: 199;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.5rem 2rem;
+    gap: 1.2rem;
+    min-width: 220px;
+  }
+  .mobile-menu.active { display: flex; }
+  .mobile-menu a {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200,224,240,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+    width: 100%;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(0,245,255,0.06);
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--cyan); }
+
+  /* ===== PAGE HEADER ===== */
+  .page-header {
+    padding: 68px 0 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-header-inner {
+    padding: 5rem 4rem 4rem;
+    position: relative;
+    z-index: 2;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-header-inner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(0,245,255,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, rgba(0,255,136,0.02) 0%, transparent 50%);
+    z-index: -1;
+  }
+
+  .breadcrumb {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .breadcrumb a {
+    color: rgba(200,224,240,0.3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .breadcrumb a:hover { color: var(--cyan); }
+  .breadcrumb .sep { color: rgba(200,224,240,0.15); }
+  .breadcrumb .current { color: var(--cyan); }
+
+  .section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.35em;
+    color: var(--cyan); text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-label::before { content: '//'; color: rgba(0,245,255,0.35); }
+
+  .page-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .page-title .cyan { color: var(--cyan); text-shadow: var(--glow-cyan); }
+
+  .page-desc {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(200,224,240,0.5);
+    max-width: 550px;
+  }
+
+  .project-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.62rem;
+    color: rgba(200,224,240,0.3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .project-count .num {
+    color: var(--cyan);
+    font-weight: 700;
+  }
+
+  /* ===== PROJECTS LIST ===== */
+  .projects-section {
+    padding: 3rem 4rem 6rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .sort-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.58rem;
+    color: rgba(200,224,240,0.25);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .sort-label::before {
+    content: '↓';
+    color: rgba(0,245,255,0.35);
+  }
+
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5px;
+    background: var(--border);
+  }
+
+  .project-card {
+    background: var(--surface);
+    padding: 2.5rem 3rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 2.5rem;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 2px;
+    background: var(--cyan);
+    transform: scaleY(0);
+    transition: transform 0.4s;
+  }
+  .project-card:hover { background: var(--dim); }
+  .project-card:hover::before { transform: scaleY(1); }
+
+  .project-date-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 70px;
+  }
+  .project-month {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.58rem;
+    color: rgba(0,245,255,0.45);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .project-year {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--cyan);
+    text-shadow: var(--glow-cyan);
+    line-height: 1;
+    margin-top: 0.15rem;
+  }
+
+  .project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .project-type-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .project-type {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    padding: 0.22rem 0.6rem;
+    border: 1px solid rgba(0,245,255,0.2);
+    color: var(--cyan);
+    text-transform: uppercase;
+  }
+  .project-type.lab { border-color: rgba(0,255,136,0.25); color: var(--green); }
+  .project-type.ctf { border-color: rgba(255,34,68,0.25); color: var(--red); }
+  .project-type.article { border-color: rgba(200,224,240,0.15); color: rgba(200,224,240,0.5); }
+  .project-type.research { border-color: rgba(0,245,255,0.2); color: var(--cyan); }
+
+  .project-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.55rem;
+    color: rgba(200,224,240,0.18);
+    letter-spacing: 0.15em;
+  }
+
+  .project-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+  .project-card:hover .project-name { color: var(--cyan); }
+
+  .project-desc {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: rgba(200,224,240,0.42);
+    font-weight: 300;
+    max-width: 600px;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.2rem;
+  }
+  .project-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.58rem;
+    padding: 0.18rem 0.5rem;
+    background: rgba(0,245,255,0.04);
+    border: 1px solid rgba(0,245,255,0.08);
+    color: rgba(0,245,255,0.38);
+    letter-spacing: 0.06em;
+  }
+
+  .project-arrow {
+    width: 36px; height: 36px;
+    border: 1px solid var(--border);
+    display: grid; place-items: center;
+    color: rgba(0,245,255,0.2);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+  .project-card:hover .project-arrow {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    box-shadow: var(--glow-cyan);
+  }
+
+  /* ===== EMPTY STATE / COMING SOON ===== */
+  .more-coming {
+    background: transparent;
+    border: 1px dashed rgba(0,245,255,0.08);
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1.5px;
+  }
+  .more-coming span {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    color: rgba(200,224,240,0.18);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    position: relative; z-index: 1;
+    background: rgba(0,0,0,0.4);
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem; font-weight: 900;
+    color: var(--cyan); opacity: 0.45; letter-spacing: 0.2em;
+  }
+  .footer-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem; color: rgba(200,224,240,0.18); letter-spacing: 0.1em;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 960px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+
+    .page-header-inner { padding: 4rem 1.5rem 3rem; }
+    .projects-section { padding: 2rem 1.5rem 4rem; }
+
+    .project-card {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 2rem 1.5rem;
+    }
+    .project-date-col {
+      flex-direction: row;
+      gap: 0.5rem;
+      align-items: baseline;
+    }
+    .project-arrow {
+      position: absolute;
+      top: 2rem; right: 1.5rem;
+    }
+
+    footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">KIERAN <span>// SECURITY</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#certs">Certifications</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Hire Me</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="index.html#about" onclick="toggleMenu()">About</a>
+  <a href="index.html#certs" onclick="toggleMenu()">Certifications</a>
+  <a href="projects.html" onclick="toggleMenu()">Projects</a>
+  <a href="index.html#contact" onclick="toggleMenu()">Contact</a>
+  <a href="index.html#contact" onclick="toggleMenu()" style="color:var(--cyan);padding-top:0.6rem;">Hire Me</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span class="current">Projects</span>
+    </div>
+    <div class="section-label">Work</div>
+    <h1 class="page-title">ALL <span class="cyan">PROJECTS</span></h1>
+    <p class="page-desc">
+      Everything I've built, broken, and written about. Home labs, CTF writeups, security research, and articles on developing tech — sorted newest first.
+    </p>
+    <div class="project-count">
+      <span class="num">03</span>
+      <span>PROJECTS</span>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS LIST -->
+<div class="projects-section">
+  <div class="sort-label">MOST RECENT FIRST</div>
+
+  <div class="projects-list">
+
+    <!-- PROJECT 3 (newest) -->
+    <a href="project-3.html" class="project-card">
+      <div class="project-date-col">
+        <span class="project-month">MMM</span>
+        <span class="project-year">2025</span>
+      </div>
+      <div class="project-info">
+        <div class="project-type-row">
+          <span class="project-type article">Article / Thought Piece</span>
+          <span class="project-num">03</span>
+        </div>
+        <div class="project-name">YOUR ARTICLE TITLE HERE</div>
+        <p class="project-desc">Thoughts on a developing technology, an emerging threat, or where the industry is heading. Replace this with your actual article summary.</p>
+        <div class="project-tags">
+          <span class="project-tag">Topic</span>
+          <span class="project-tag">Topic</span>
+        </div>
+      </div>
+      <div class="project-arrow">→</div>
+    </a>
+
+    <!-- PROJECT 2 -->
+    <a href="project-2.html" class="project-card">
+      <div class="project-date-col">
+        <span class="project-month">MMM</span>
+        <span class="project-year">2025</span>
+      </div>
+      <div class="project-info">
+        <div class="project-type-row">
+          <span class="project-type ctf">CTF / Challenge</span>
+          <span class="project-num">02</span>
+        </div>
+        <div class="project-name">YOUR CTF WRITEUP TITLE HERE</div>
+        <p class="project-desc">A CTF writeup showing your problem-solving approach, the tools you used, and what you learned. Replace with your actual writeup summary.</p>
+        <div class="project-tags">
+          <span class="project-tag">Tool / Tech</span>
+          <span class="project-tag">Tool / Tech</span>
+        </div>
+      </div>
+      <div class="project-arrow">→</div>
+    </a>
+
+    <!-- PROJECT 1 (oldest) -->
+    <a href="project-1.html" class="project-card">
+      <div class="project-date-col">
+        <span class="project-month">MMM</span>
+        <span class="project-year">2024</span>
+      </div>
+      <div class="project-info">
+        <div class="project-type-row">
+          <span class="project-type lab">Home Lab</span>
+          <span class="project-num">01</span>
+        </div>
+        <div class="project-name">YOUR HOME LAB TITLE HERE</div>
+        <p class="project-desc">Describe what you built, the tools and tech involved, and what you learned. Home lab setups show initiative and hands-on experience.</p>
+        <div class="project-tags">
+          <span class="project-tag">Tool / Tech</span>
+          <span class="project-tag">Tool / Tech</span>
+          <span class="project-tag">Tool / Tech</span>
+        </div>
+      </div>
+      <div class="project-arrow">→</div>
+    </a>
+
+  </div>
+
+  <div class="more-coming">
+    <span>+ More projects coming soon</span>
+    <span style="font-size:0.6rem;opacity:0.5">always building</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">KIERAN</div>
+  <div class="footer-text">CYBERSECURITY STUDENT — COMPTIA A+ · NET+ · SEC+</div>
+  <div class="footer-text">BUILT WITH CLAUDE &nbsp;|&nbsp; HOSTED ON NETLIFY</div>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('active');
+  document.getElementById('mobileMenu').classList.toggle('active');
+}
+</script>
+
+</body>
+</html>
