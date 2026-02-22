@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>KIERAN — Cybersecurity Portfolio</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;500;700&family=Orbitron:wght@400;700;900&display=swap');
@@ -811,508 +812,204 @@
 </style>
 </head>
 <body>
-
 <!-- NAV -->
 <nav>
-  <div class="logo">KIERAN <span>// SECURITY</span></div>
-  <ul class="nav-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="certifications.html">Certifications</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <a href="contact.html" class="nav-cta">Hire Me</a>
-  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
+<div class="logo">KIERAN <span>// SECURITY</span></div>
+<ul class="nav-links">
+<li><a href="about.html">About</a></li>
+<li><a href="certifications.html">Certifications</a></li>
+<li><a href="projects.html">Projects</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+<a class="nav-cta" href="contact.html">Hire Me</a>
+<div class="hamburger" id="hamburger" onclick="toggleMenu()">
+<span></span><span></span><span></span>
+</div>
 </nav>
-
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html" onclick="toggleMenu()">Home</a>
-  <a href="about.html" onclick="toggleMenu()">About</a>
-  <a href="certifications.html" onclick="toggleMenu()">Certifications</a>
-  <a href="projects.html" onclick="toggleMenu()">Projects</a>
-  <a href="contact.html" onclick="toggleMenu()">Contact</a>
-  <a href="contact.html" onclick="toggleMenu()" style="color:var(--cyan);padding-top:0.6rem;">Hire Me</a>
+<a href="index.html" onclick="toggleMenu()">Home</a>
+<a href="about.html" onclick="toggleMenu()">About</a>
+<a href="certifications.html" onclick="toggleMenu()">Certifications</a>
+<a href="projects.html" onclick="toggleMenu()">Projects</a>
+<a href="contact.html" onclick="toggleMenu()">Contact</a>
+<a href="contact.html" onclick="toggleMenu()" style="color:var(--cyan);padding-top:0.6rem;">Hire Me</a>
 </div>
-
 <!-- HERO -->
 <section class="hero" id="home">
-  <canvas id="attackCanvas"></canvas>
-  <div class="hero-overlay"></div>
-
-  <div class="map-hud">
-    <div class="hud-counter">
-      <div class="hud-label">SIMULATED THREAT VISUALIZATION</div>
-      <div class="hud-number" id="threatCount">0</div>
-    </div>
-    <div class="hud-legend">
-      <div class="legend-item">
-        <span class="legend-dot red"></span>
-        <span>ATTACK BLOCKED</span>
-      </div>
-      <div class="legend-item">
-        <span class="legend-dot cyan"></span>
-        <span>ACTIVE INTRUSION</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="map-labels" id="mapLabels"></div>
-
-  <div class="hero-content">
-    <div class="hero-tag">// Cybersecurity Student &amp; CompTIA Certified</div>
-    <h1 class="hero-title">
-      <span class="block"></span>
-      <span class="block cyan">KIERAN.</span>
-      <span class="block">BREAKING THINGS</span>
-      <span class="sub">TO MAKE THEM STRONGER.</span>
-    </h1>
-    <p class="hero-desc">
-      Cybersecurity student on a mission to master offensive and defensive security.
-      CompTIA trifecta certified and actively building real-world projects to back it up.
-    </p>
-    <div class="hero-actions">
-      <a href="projects.html" class="btn-primary">View My Work</a>
-      <a href="certifications.html" class="btn-secondary">My Credentials</a>
-    </div>
-    <div class="hero-stats">
-      <div>
-        <span class="stat-num">3</span>
-        <span class="stat-label">CompTIA Certs</span>
-      </div>
-      <div>
-        <span class="stat-num">∞</span>
-        <span class="stat-label">More to Earn</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero-shield">
-    <div class="shield-wrap">
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="ring"></div>
-      <div class="shield-center">
-        <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M50 8 L88 22 L88 56 C88 80 72 98 50 112 C28 98 12 80 12 56 L12 22 Z"
-                stroke="#00f5ff" stroke-width="2" fill="rgba(0,245,255,0.05)"/>
-          <path d="M50 20 L78 31 L78 57 C78 76 66 90 50 102 C34 90 22 76 22 57 L22 31 Z"
-                stroke="rgba(0,245,255,0.3)" stroke-width="1" fill="rgba(0,245,255,0.03)"/>
-          <path d="M35 60 L45 70 L68 45" stroke="#00ff88" stroke-width="3"
-                stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-    </div>
-  </div>
-
-  <div class="status-bar">
-    <div class="status-dot"></div>
-    OPEN TO OPPORTUNITIES &nbsp;|&nbsp; COMPTIA A+ · NET+ · SEC+ &nbsp;|&nbsp; LEVELING UP
-  </div>
+<canvas id="attackCanvas"></canvas>
+<div class="hero-overlay"></div>
+<div class="map-hud">
+<div class="hud-counter">
+<div class="hud-label">SIMULATED THREAT VISUALIZATION</div>
+<div class="hud-number" id="threatCount">0</div>
+</div>
+<div class="hud-legend">
+<div class="legend-item">
+<span class="legend-dot red"></span>
+<span>ATTACK BLOCKED</span>
+</div>
+<div class="legend-item">
+<span class="legend-dot cyan"></span>
+<span>ACTIVE INTRUSION</span>
+</div>
+</div>
+</div>
+<div class="map-labels" id="mapLabels"></div>
+<div class="hero-content">
+<div class="hero-tag">// Cybersecurity Student</div>
+<h1 class="hero-title">
+<span class="block"></span>
+<span class="block cyan">KIERAN.</span>
+<span class="block">BREAKING THINGS</span>
+<span class="sub">TO MAKE THEM STRONGER.</span>
+</h1>
+<p class="hero-desc">Cybersecurity student on a mission to master offensive and defensive security.
+      CompTIA trifecta certified and actively building real-world projects to back it up.</p>
+<div class="hero-actions">
+<a class="btn-primary" href="projects.html">View My Work</a>
+<a class="btn-secondary" href="certifications.html">My Credentials</a>
+</div>
+<div class="hero-stats">
+<div>
+<span class="stat-num">3</span>
+<span class="stat-label">CompTIA Certs</span>
+</div>
+<div>
+<span class="stat-num">∞</span>
+<span class="stat-label">More to Earn</span>
+</div>
+</div>
+</div>
+<div class="hero-shield">
+<div class="shield-wrap">
+<div class="ring"></div>
+<div class="ring"></div>
+<div class="ring"></div>
+<div class="ring"></div>
+<div class="shield-center">
+<svg fill="none" viewbox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 8 L88 22 L88 56 C88 80 72 98 50 112 C28 98 12 80 12 56 L12 22 Z" fill="rgba(0,245,255,0.05)" stroke="#00f5ff" stroke-width="2"></path>
+<path d="M50 20 L78 31 L78 57 C78 76 66 90 50 102 C34 90 22 76 22 57 L22 31 Z" fill="rgba(0,245,255,0.03)" stroke="rgba(0,245,255,0.3)" stroke-width="1"></path>
+<path d="M35 60 L45 70 L68 45" stroke="#00ff88" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="status-bar"><div class="status-dot"></div> OPEN TO OPPORTUNITIES</div>
 </section>
-
 <!-- ABOUT -->
 <section class="about" id="about">
-  <div class="about-visual">
-    <div class="avatar-frame">
-      <!-- Replace the div below with: <img class="avatar-img" src="your-photo.jpg" alt="Kieran"> -->
-      <div class="avatar-inner">K</div>
-      <div class="avatar-tag">// KIERAN — SEC+</div>
-    </div>
-  </div>
-  <div>
-    <div class="section-label">About Me</div>
-    <h2 class="section-title">STUDENT.<br>BUILDER.<br>DEFENDER.</h2>
-    <p class="about-text">I'm a cybersecurity student with a genuine passion for understanding how systems work — and how they break. I don't just study for exams; I build labs, run simulations, and dig into the details that most people skip.</p>
-    <p class="about-text">I recently completed the CompTIA trifecta (A+, Network+, and Security+), and I'm already mapping out my next certifications. For me, this isn't just a career path — it's something I find genuinely fascinating.</p>
-    <p class="about-text">I'm looking for opportunities to apply what I know, keep learning fast, and work alongside people who take security seriously.</p>
-    <div class="skill-tags">
-      <div class="skill-tag">Network Security</div>
-      <div class="skill-tag">Threat Analysis</div>
-      <div class="skill-tag">Linux</div>
-      <div class="skill-tag">Wireshark</div>
-      <div class="skill-tag">TCP/IP</div>
-      <div class="skill-tag">Incident Response</div>
-      <div class="skill-tag">CompTIA A+</div>
-      <div class="skill-tag">CompTIA Net+</div>
-      <div class="skill-tag">CompTIA Sec+</div>
-    </div>
-  </div>
+<div class="about-visual">
+<div class="avatar-frame">
+<!-- Replace the div below with: <img class="avatar-img" src="your-photo.jpg" alt="Kieran"> -->
+<div class="avatar-inner">K</div>
+<div class="avatar-tag">// KIERAN — SEC+</div>
+</div>
+</div>
+<div>
+<div class="section-label">About Me</div>
+<h2 class="section-title">STUDENT.<br/>BUILDER.<br/>DEFENDER.</h2>
+<p class="about-text">I'm a cybersecurity student with a genuine passion for understanding how systems work — and how they break. I don't just study for exams; I build labs, run simulations, and dig into the details that most people skip.</p>
+<p class="about-text">I recently completed the CompTIA trifecta (A+, Network+, and Security+), and I'm already mapping out my next certifications. For me, this isn't just a career path — it's something I find genuinely fascinating.</p>
+<p class="about-text">I'm looking for opportunities to apply what I know, keep learning fast, and work alongside people who take security seriously.</p>
+<div class="skill-tags"><div class="skill-tag">Network Security</div><div class="skill-tag">Threat Analysis</div><div class="skill-tag">Linux</div><div class="skill-tag">Wireshark</div><div class="skill-tag">TCP/IP</div><div class="skill-tag">Incident Response</div><div class="skill-tag">CompTIA A+</div><div class="skill-tag">CompTIA Net+</div><div class="skill-tag">CompTIA Sec+</div></div>
+</div>
 </section>
-
 <!-- CERTIFICATIONS -->
 <section class="certs" id="certs">
-  <div class="section-label">Credentials</div>
-  <h2 class="section-title">CERTIFICATIONS</h2>
-  <div class="certs-grid">
-    <div class="cert-card">
-      <div class="cert-badge">CompTIA<br>A+</div>
-      <div class="cert-issuer">CompTIA</div>
-      <div class="cert-name">A+ Core 1 &amp; Core 2</div>
-      <p class="cert-desc">Covers hardware, networking, operating systems, security, and troubleshooting across a wide range of devices and environments. The industry entry point for IT professionals.</p>
-      <div class="cert-status">VERIFIED — EARNED MM/YYYY &nbsp;|&nbsp; EXPIRES MM/YYYY</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-badge">CompTIA<br>Net+</div>
-      <div class="cert-issuer">CompTIA</div>
-      <div class="cert-name">Network+</div>
-      <p class="cert-desc">Validates core networking skills including infrastructure design, protocols, troubleshooting, and network security concepts. Essential for anyone working in modern IT environments.</p>
-      <div class="cert-status">VERIFIED — EARNED MM/YYYY &nbsp;|&nbsp; EXPIRES MM/YYYY</div>
-    </div>
-    <div class="cert-card" style="position:relative;">
-      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--green))"></div>
-      <div class="cert-badge" style="border-color:rgba(0,245,255,0.4);background:rgba(0,245,255,0.08);color:var(--cyan)">CompTIA<br>Sec+</div>
-      <div class="cert-issuer" style="color:rgba(0,245,255,0.6)">CompTIA</div>
-      <div class="cert-name">Security+</div>
-      <p class="cert-desc">The gold standard entry-level security certification. Covers threats, vulnerabilities, risk management, cryptography, and identity management. DoD-approved and globally recognized.</p>
-      <div class="cert-status">VERIFIED — EARNED MM/YYYY &nbsp;|&nbsp; EXPIRES MM/YYYY</div>
-    </div>
-    <div class="cert-card cert-incoming">
-      <div class="cert-badge" style="border-color:rgba(0,245,255,0.1);background:transparent;color:rgba(0,245,255,0.2)">NEXT<br>CERT</div>
-      <div class="cert-issuer" style="color:rgba(200,224,240,0.2)">In Progress</div>
-      <div class="cert-name" style="color:rgba(200,224,240,0.3)">Coming Soon</div>
-      <p class="cert-desc">Currently studying and working toward the next certification. Check back soon.</p>
-      <div class="cert-status" style="color:rgba(0,245,255,0.3)">IN PROGRESS</div>
-    </div>
-    <div class="cert-card cert-incoming">
-      <div class="cert-badge" style="border-color:rgba(0,245,255,0.1);background:transparent;color:rgba(0,245,255,0.2)">NEXT<br>CERT</div>
-      <div class="cert-issuer" style="color:rgba(200,224,240,0.2)">Planned</div>
-      <div class="cert-name" style="color:rgba(200,224,240,0.3)">On The Roadmap</div>
-      <p class="cert-desc">More certifications planned as the journey continues. The grind doesn't stop.</p>
-      <div class="cert-status" style="color:rgba(0,245,255,0.3)">PLANNED</div>
-    </div>
-    <div class="cert-card cert-incoming">
-      <div class="cert-badge" style="border-color:rgba(0,245,255,0.1);background:transparent;color:rgba(0,245,255,0.2)">NEXT<br>CERT</div>
-      <div class="cert-issuer" style="color:rgba(200,224,240,0.2)">Planned</div>
-      <div class="cert-name" style="color:rgba(200,224,240,0.3)">On The Roadmap</div>
-      <p class="cert-desc">Building a deep and wide certification stack to back up the hands-on work.</p>
-      <div class="cert-status" style="color:rgba(0,245,255,0.3)">PLANNED</div>
-    </div>
-  </div>
+<div class="section-label">Credentials</div>
+<h2 class="section-title">CERTIFICATIONS</h2>
+<div class="certs-grid">
+<div class="cert-card">
+<div class="cert-badge">CompTIA<br/>A+</div>
+<div class="cert-issuer">CompTIA</div>
+<div class="cert-name">A+ Core 1 &amp; Core 2</div>
+<p class="cert-desc">Covers hardware, networking, operating systems, security, and troubleshooting across a wide range of devices and environments. The industry entry point for IT professionals.</p>
+<div class="cert-status">VERIFIED — EARNED MM/YYYY  |  EXPIRES MM/YYYY</div>
+</div>
+<div class="cert-card">
+<div class="cert-badge">CompTIA<br/>Net+</div>
+<div class="cert-issuer">CompTIA</div>
+<div class="cert-name">Network+</div>
+<p class="cert-desc">Validates core networking skills including infrastructure design, protocols, troubleshooting, and network security concepts. Essential for anyone working in modern IT environments.</p>
+<div class="cert-status">VERIFIED — EARNED MM/YYYY  |  EXPIRES MM/YYYY</div>
+</div>
+<div class="cert-card" style="position:relative;">
+<div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--green))"></div>
+<div class="cert-badge" style="border-color:rgba(0,245,255,0.4);background:rgba(0,245,255,0.08);color:var(--cyan)">CompTIA<br/>Sec+</div>
+<div class="cert-issuer" style="color:rgba(0,245,255,0.6)">CompTIA</div>
+<div class="cert-name">Security+</div>
+<p class="cert-desc">The gold standard entry-level security certification. Covers threats, vulnerabilities, risk management, cryptography, and identity management. DoD-approved and globally recognized.</p>
+<div class="cert-status">VERIFIED — EARNED MM/YYYY  |  EXPIRES MM/YYYY</div>
+</div>
+<div class="cert-card cert-incoming">
+<div class="cert-badge" style="border-color:rgba(0,245,255,0.1);background:transparent;color:rgba(0,245,255,0.2)">NEXT<br/>CERT</div>
+<div class="cert-issuer" style="color:rgba(200,224,240,0.2)">In Progress</div>
+<div class="cert-name" style="color:rgba(200,224,240,0.3)">Coming Soon</div>
+<p class="cert-desc">Currently studying and working toward the next certification. Check back soon.</p>
+<div class="cert-status" style="color:rgba(0,245,255,0.3)">IN PROGRESS</div>
+</div>
+<div class="cert-card cert-incoming">
+<div class="cert-badge" style="border-color:rgba(0,245,255,0.1);background:transparent;color:rgba(0,245,255,0.2)">NEXT<br/>CERT</div>
+<div class="cert-issuer" style="color:rgba(200,224,240,0.2)">Planned</div>
+<div class="cert-name" style="color:rgba(200,224,240,0.3)">On The Roadmap</div>
+<p class="cert-desc">More certifications planned as the journey continues. The grind doesn't stop.</p>
+<div class="cert-status" style="color:rgba(0,245,255,0.3)">PLANNED</div>
+</div>
+<div class="cert-card cert-incoming">
+<div class="cert-badge" style="border-color:rgba(0,245,255,0.1);background:transparent;color:rgba(0,245,255,0.2)">NEXT<br/>CERT</div>
+<div class="cert-issuer" style="color:rgba(200,224,240,0.2)">Planned</div>
+<div class="cert-name" style="color:rgba(200,224,240,0.3)">On The Roadmap</div>
+<p class="cert-desc">Building a deep and wide certification stack to back up the hands-on work.</p>
+<div class="cert-status" style="color:rgba(0,245,255,0.3)">PLANNED</div>
+</div>
+</div>
 </section>
-
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <div>
-    <div class="section-label">Get In Touch</div>
-    <h2 class="section-title">LET'S<br>CONNECT.</h2>
-    <p style="color:rgba(200,224,240,0.55);line-height:1.9;font-size:0.97rem;font-weight:300;margin-top:1.25rem;max-width:380px">
+<div>
+<div class="section-label">Get In Touch</div>
+<h2 class="section-title">LET'S<br/>CONNECT.</h2>
+<p style="color:rgba(200,224,240,0.55);line-height:1.9;font-size:0.97rem;font-weight:300;margin-top:1.25rem;max-width:380px">
       Whether you're hiring, collaborating, or just want to talk security — my inbox is open. Actively looking for internships, junior roles, and interesting projects.
     </p>
-    <div class="contact-links">
-      <a href="/cdn-cgi/l/email-protection#621b0d17104c070f030b0e22071a030f120e074c010d0f" class="contact-link">
-        <div class="contact-link-icon">✉</div>
-        <div>
-          <span class="contact-link-label">Email</span>
-          <span class="contact-link-value"><span class="__cf_email__" data-cfemail="5f26302a2d713a323e36331f3a273e322f333a713c3032">[email&#160;protected]</span></span>
-        </div>
-      </a>
-      <a href="https://linkedin.com/in/yourprofile" class="contact-link" target="_blank">
-        <div class="contact-link-icon">in</div>
-        <div>
-          <span class="contact-link-label">LinkedIn</span>
-          <span class="contact-link-value">linkedin.com/in/yourprofile</span>
-        </div>
-      </a>
-      <a href="https://github.com/yourusername" class="contact-link" target="_blank">
-        <div class="contact-link-icon">&lt;/&gt;</div>
-        <div>
-          <span class="contact-link-label">GitHub</span>
-          <span class="contact-link-value">github.com/yourusername</span>
-        </div>
-      </a>
-    </div>
-  </div>
-  <div>
-    <div class="section-label" style="margin-bottom:1.5rem">Send a Message</div>
-    <p style="color:rgba(200,224,240,0.4);font-size:0.88rem;font-weight:300;line-height:1.8;margin-bottom:1.5rem;max-width:380px">
+<div class="contact-links">
+<a class="contact-link" href="/cdn-cgi/l/email-protection#621b0d17104c070f030b0e22071a030f120e074c010d0f">
+<div class="contact-link-icon">✉</div>
+<div>
+<span class="contact-link-label">Email</span>
+<span class="contact-link-value"><span class="__cf_email__" data-cfemail="5f26302a2d713a323e36331f3a273e322f333a713c3032">[email protected]</span></span>
+</div>
+</a>
+<a class="contact-link" href="https://linkedin.com/in/yourprofile" target="_blank">
+<div class="contact-link-icon">in</div>
+<div>
+<span class="contact-link-label">LinkedIn</span>
+<span class="contact-link-value">linkedin.com/in/yourprofile</span>
+</div>
+</a>
+<a class="contact-link" href="https://github.com/yourusername" target="_blank">
+<div class="contact-link-icon">&lt;/&gt;</div>
+<div>
+<span class="contact-link-label">GitHub</span>
+<span class="contact-link-value">github.com/yourusername</span>
+</div>
+</a>
+</div>
+</div>
+<div>
+<div class="section-label" style="margin-bottom:1.5rem">Send a Message</div>
+<p style="color:rgba(200,224,240,0.4);font-size:0.88rem;font-weight:300;line-height:1.8;margin-bottom:1.5rem;max-width:380px">
       Click below to open your email client with my address pre-filled. Tell me what you're working on — I'd love to hear from you.
     </p>
-    <a href="/cdn-cgi/l/email-protection#f28b9d8780dc979f939b9eb2978a939f829e97dc919d9fcd81879098979186cfba978bd7c0c2b99b9780939cd7c0c2107266d7c0c2be9786d581d7c0c2b19d9c9c979186" class="btn-primary" style="width:fit-content;display:inline-block;text-decoration:none">Send Message ✉</a>
-  </div>
+<a class="btn-primary" href="/cdn-cgi/l/email-protection#f28b9d8780dc979f939b9eb2978a939f829e97dc919d9fcd81879098979186cfba978bd7c0c2b99b9780939cd7c0c2107266d7c0c2be9786d581d7c0c2b19d9c9c979186" style="width:fit-content;display:inline-block;text-decoration:none">Send Message ✉</a>
+</div>
 </section>
-
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">KIERAN</div>
-  <div class="footer-text">CYBERSECURITY STUDENT — COMPTIA A+ · NET+ · SEC+</div>
-  <div class="footer-text">BUILT WITH CLAUDE &nbsp;|&nbsp; HOSTED ON NETLIFY</div>
+<div class="footer-logo">KIERAN</div>
+<div class="footer-text">CYBERSECURITY STUDENT — COMPTIA A+ · NET+ · SEC+</div>
+<div class="footer-text">BUILT WITH CLAUDE  |  HOSTED ON NETLIFY</div>
 </footer>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const canvas = document.getElementById('attackCanvas');
-const ctx    = canvas.getContext('2d');
-const dpr    = window.devicePixelRatio || 1;
-
-function resize() {
-  const w = canvas.offsetWidth;
-  const h = canvas.offsetHeight;
-  canvas.width  = w * dpr;
-  canvas.height = h * dpr;
-  ctx.scale(dpr, dpr);
-}
-resize();
-window.addEventListener('resize', () => { resize(); if(typeof positionLabels==='function') positionLabels(); });
-
-/* Projection: centered at -30W, locked 2:1 aspect ratio to prevent phone stretch */
-function project(lat, lng, W, H) {
-  const centerLng = -30;
-  let normLng = ((lng - centerLng + 540) % 360) - 180;
-  /* Map always 2:1 ratio, fitted to width, centered vertically */
-  const mapW = W;
-  const mapH = mapW / 2;
-  const offsetY = (H - mapH) / 2;
-  const x = (normLng + 180) / 360 * mapW;
-  const y = (90 - lat) / 180 * mapH + offsetY;
-  return [x, y];
-}
-
-/* ── Load real world coastlines from GeoJSON ── */
-let geoData = null;
-fetch('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson')
-  .then(r => r.json())
-  .then(data => { geoData = data.features; })
-  .catch(e => console.warn('GeoJSON load failed:', e));
-
-function drawRing(ring, W, H) {
-  /* GeoJSON coords are [lng, lat] */
-  if (ring.length < 3) return;
-  const [sx, sy] = project(ring[0][1], ring[0][0], W, H);
-  ctx.moveTo(sx, sy);
-  for (let i = 1; i < ring.length; i++) {
-    const [x, y] = project(ring[i][1], ring[i][0], W, H);
-    ctx.lineTo(x, y);
-  }
-  ctx.closePath();
-}
-
-function drawCountries(W, H, mode) {
-  if (!geoData) return;
-  ctx.beginPath();
-  geoData.forEach(feature => {
-    const geom = feature.geometry;
-    if (geom.type === 'Polygon') {
-      geom.coordinates.forEach(ring => drawRing(ring, W, H));
-    } else if (geom.type === 'MultiPolygon') {
-      geom.coordinates.forEach(poly => {
-        poly.forEach(ring => drawRing(ring, W, H));
-      });
-    }
-  });
-  if (mode === 'fill') {
-    ctx.fillStyle = 'rgba(0,245,255,0.045)';
-    ctx.fill();
-  } else {
-    ctx.strokeStyle = 'rgba(0,245,255,0.28)';
-    ctx.lineWidth = 0.5;
-    ctx.stroke();
-  }
-}
-
-const ATTACK_PAIRS = [
-  { origin:{lat:39.9,lng:116.4}, target:{lat:38.9, lng:-77.0}  },
-  { origin:{lat:55.75,lng:37.6}, target:{lat:40.7, lng:-74.0}  },
-  { origin:{lat:39.0,lng:125.8}, target:{lat:34.05,lng:-118.2} },
-  { origin:{lat:35.7,lng:51.4},  target:{lat:41.85,lng:-87.65} },
-  { origin:{lat:1.35,lng:103.8}, target:{lat:47.6, lng:-122.3} },
-  { origin:{lat:6.5,lng:3.4},    target:{lat:25.77,lng:-80.19} },
-  { origin:{lat:48.85,lng:2.35}, target:{lat:42.36,lng:-71.06} },
-  { origin:{lat:-23.5,lng:-46.6},target:{lat:29.76,lng:-95.37} },
-  { origin:{lat:28.6,lng:77.2},  target:{lat:47.6, lng:-122.3} },
-  { origin:{lat:38.9,lng:-77.0}, target:{lat:39.9, lng:116.4}  },
-  { origin:{lat:38.9,lng:-77.0}, target:{lat:55.75,lng:37.6}   },
-  { origin:{lat:40.7,lng:-74.0}, target:{lat:35.7, lng:51.4}   },
-  { origin:{lat:47.6,lng:-122.3},target:{lat:39.0, lng:125.8}  },
-  { origin:{lat:55.75,lng:37.6}, target:{lat:48.85,lng:2.35}   },
-  { origin:{lat:39.9,lng:116.4}, target:{lat:35.7, lng:139.7}  },
-  { origin:{lat:51.5,lng:-0.12}, target:{lat:55.75,lng:37.6}   },
-  { origin:{lat:39.9,lng:116.4}, target:{lat:1.35, lng:103.8}  },
-  { origin:{lat:35.7,lng:51.4},  target:{lat:28.6, lng:77.2}   },
-];
-
-const edgeGlows = [];
-const arcs = [];
-const MAX_ARCS = 24;
-
-function spawnArc() {
-  const pair = ATTACK_PAIRS[Math.floor(Math.random() * ATTACK_PAIRS.length)];
-  const isRed = Math.random() < 0.28;
-  arcs.push({
-    origin: pair.origin, target: pair.target,
-    t: 0, speed: 0.003 + Math.random() * 0.005,
-    trail: [], isRed, done: false, flash: 0,
-  });
-}
-
-for (let i = 0; i < MAX_ARCS; i++) {
-  spawnArc();
-  arcs[arcs.length-1].t = Math.random() * 0.9;
-}
-
-function bezier(p0, p1, p2, t) {
-  const mt = 1 - t;
-  return [mt*mt*p0[0]+2*mt*t*p1[0]+t*t*p2[0], mt*mt*p0[1]+2*mt*t*p1[1]+t*t*p2[1]];
-}
-
-function draw() {
-  const W = canvas.offsetWidth, H = canvas.offsetHeight;
-  ctx.clearRect(0, 0, W, H);
-
-  /* Grid */
-  ctx.strokeStyle = 'rgba(0,245,255,0.025)';
-  ctx.lineWidth = 0.5;
-  for (let lat = -60; lat <= 80; lat += 30) {
-    const [,y] = project(lat, 0, W, H);
-    ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke();
-  }
-  for (let lng = -180; lng <= 180; lng += 30) {
-    const [x] = project(0, lng, W, H);
-    ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke();
-  }
-
-  /* Fill countries */
-  drawCountries(W, H, 'fill');
-
-  /* Edge glows */
-  edgeGlows.forEach(g => {
-    const gx = g.px * W, gy = g.py * H;
-    const r  = g.radius * Math.min(W, H);
-    const alpha = (g.life / g.maxLife) * g.intensity;
-    const grad = ctx.createRadialGradient(gx, gy, 0, gx, gy, r);
-    grad.addColorStop(0, 'rgba(0,245,255,'+(alpha*0.7)+')');
-    grad.addColorStop(0.4, 'rgba(0,245,255,'+(alpha*0.3)+')');
-    grad.addColorStop(1, 'rgba(0,245,255,0)');
-    ctx.beginPath(); ctx.arc(gx, gy, r, 0, Math.PI*2);
-    ctx.fillStyle = grad; ctx.fill();
-    g.life--;
-  });
-  for (let i = edgeGlows.length-1; i >= 0; i--) {
-    if (edgeGlows[i].life <= 0) edgeGlows.splice(i, 1);
-  }
-
-  /* Stroke countries */
-  drawCountries(W, H, 'stroke');
-
-  /* Target city dots */
-  [{lat:38.9,lng:-77.0},{lat:40.7,lng:-74.0},{lat:34.05,lng:-118.2},
-   {lat:41.85,lng:-87.65},{lat:47.6,lng:-122.3},{lat:25.77,lng:-80.19},
-   {lat:29.76,lng:-95.37},{lat:35.7,lng:139.7}
-  ].forEach(function(c) {
-    const p = project(c.lat,c.lng,W,H);
-    ctx.beginPath(); ctx.arc(p[0],p[1],4,0,Math.PI*2);
-    ctx.strokeStyle='rgba(0,245,255,0.3)'; ctx.lineWidth=1; ctx.stroke();
-    ctx.beginPath(); ctx.arc(p[0],p[1],1.8,0,Math.PI*2);
-    ctx.fillStyle='rgba(0,245,255,0.75)'; ctx.fill();
-  });
-
-  /* Origin city dots */
-  ATTACK_PAIRS.forEach(function(p) {
-    const pt = project(p.origin.lat, p.origin.lng, W, H);
-    ctx.beginPath(); ctx.arc(pt[0],pt[1],2,0,Math.PI*2);
-    ctx.fillStyle='rgba(255,34,68,0.55)';
-    ctx.shadowColor='#ff2244'; ctx.shadowBlur=4; ctx.fill(); ctx.shadowBlur=0;
-  });
-
-  /* Attack arcs */
-  arcs.forEach(function(arc) {
-    if (arc.done) {
-      if (arc.flash > 0) {
-        var tp = project(arc.target.lat, arc.target.lng, W, H);
-        var a = arc.flash / 20;
-        ctx.beginPath();
-        ctx.arc(tp[0],tp[1],(1-arc.flash/20)*14+3,0,Math.PI*2);
-        ctx.strokeStyle = arc.isRed ? 'rgba(255,34,68,'+a+')' : 'rgba(0,245,255,'+a+')';
-        ctx.lineWidth=1.5; ctx.stroke();
-        arc.flash--;
-      }
-      return;
-    }
-    var op = project(arc.origin.lat, arc.origin.lng, W, H);
-    var tp = project(arc.target.lat, arc.target.lng, W, H);
-    var mx=(op[0]+tp[0])/2, my=(op[1]+tp[1])/2 - Math.hypot(tp[0]-op[0],tp[1]-op[1])*0.36;
-
-    arc.t += arc.speed;
-    if (arc.t >= 1) {
-      arc.t = 1; arc.done = true; arc.flash = 20;
-      edgeGlows.push({
-        px: tp[0]/W, py: tp[1]/H,
-        radius: 0.12 + Math.random()*0.08,
-        intensity: 0.55 + Math.random()*0.35,
-        life: 60 + Math.floor(Math.random()*40),
-        maxLife: 60 + Math.floor(Math.random()*40),
-      });
-    }
-
-    var hp = bezier([op[0],op[1]],[mx,my],[tp[0],tp[1]],arc.t);
-    arc.trail.push(hp);
-    if (arc.trail.length > 28) arc.trail.shift();
-
-    var rgb = arc.isRed ? '255,34,68' : '0,245,255';
-    for (var j=1; j<arc.trail.length; j++) {
-      var al=(j/arc.trail.length)*0.75, w=(j/arc.trail.length)*2;
-      ctx.beginPath();
-      ctx.moveTo(arc.trail[j-1][0],arc.trail[j-1][1]);
-      ctx.lineTo(arc.trail[j][0],arc.trail[j][1]);
-      ctx.strokeStyle='rgba('+rgb+','+al+')'; ctx.lineWidth=w; ctx.stroke();
-    }
-    ctx.beginPath(); ctx.arc(hp[0],hp[1],2.5,0,Math.PI*2);
-    ctx.fillStyle=arc.isRed?'#ff2244':'#00f5ff';
-    ctx.shadowColor=arc.isRed?'#ff2244':'#00f5ff'; ctx.shadowBlur=7;
-    ctx.fill(); ctx.shadowBlur=0;
-  });
-
-  for (var i=arcs.length-1; i>=0; i--) {
-    if (arcs[i].done && arcs[i].flash<=0) arcs.splice(i,1);
-  }
-  while (arcs.length < MAX_ARCS) spawnArc();
-  requestAnimationFrame(draw);
-}
-draw();
-
-// Counter
-var baseMillion = 10 + Math.floor(Math.random() * 5);
-var baseHundredK = Math.floor(Math.random() * 10);
-var d1 = Math.floor(Math.random() * 10);
-var d2 = Math.floor(Math.random() * 10);
-var d3 = Math.floor(Math.random() * 10);
-var d4 = Math.floor(Math.random() * 10);
-var counterEl = document.getElementById('threatCount');
-function renderCount() {
-  counterEl.textContent = baseMillion + ',' + baseHundredK + d1 + d2 + ',' + d3 + d4 + '0';
-}
-setInterval(function() { d4 = Math.floor(Math.random() * 10); renderCount(); }, 80);
-setInterval(function() { d3 = Math.floor(Math.random() * 10); }, 400);
-setInterval(function() { d2 = Math.floor(Math.random() * 10); }, 2000);
-setInterval(function() { d1 = Math.floor(Math.random() * 10); }, 8000);
-setInterval(function() {
-  baseHundredK += Math.random() < 0.5 ? 1 : 0;
-  if (baseHundredK > 9) { baseHundredK = 0; baseMillion = Math.min(15, baseMillion + 1); }
-}, 45000);
-renderCount();
-
-// City labels
-var labelData = [
-  {name:'D.C.',      lat:38.9,  lng:-77.0,  type:'target'},
-  {name:'NEW YORK',  lat:40.7,  lng:-74.0,  type:'target'},
-  {name:'L.A.',      lat:34.05, lng:-118.2, type:'target'},
-  {name:'SEATTLE',   lat:47.6,  lng:-122.3, type:'target'},
-  {name:'BEIJING',   lat:39.9,  lng:116.4,  type:'origin'},
-  {name:'MOSCOW',    lat:55.75, lng:37.6,   type:'origin'},
-  {name:'TEHRAN',    lat:35.7,  lng:51.4,   type:'origin'},
-  {name:'SINGAPORE', lat:1.35,  lng:103.8,  type:'origin'},
-  {name:'LONDON',    lat:51.5,  lng:-0.12,  type:'origin'},
-];
-
-function positionLabels() {
-  var el = document.getElementById('mapLabels');
-  if (!el) return;
-  el.innerHTML = '';
-  var W=canvas.offsetWidth, H=canvas.offsetHeight;
-  labelData.forEach(function(d) {
-    var p = project(d.lat, d.lng, W, H);
-    var div = document.createElement('div');
-    div.className = 'map-label'+(d.type==='origin'?' origin':'');
- 
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script></script></body></html>
