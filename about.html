@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — KIERAN // SECURITY</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;500;700&family=Orbitron:wght@400;700;900&display=swap');
+
+  :root {
+    --bg: #020409;
+    --surface: #070d18;
+    --cyan: #00f5ff;
+    --green: #00ff88;
+    --red: #ff2244;
+    --dim: #0a1628;
+    --border: rgba(0,245,255,0.15);
+    --text: #c8e0f0;
+    --glow-cyan: 0 0 20px rgba(0,245,255,0.5), 0 0 60px rgba(0,245,255,0.2);
+    --glow-green: 0 0 20px rgba(0,255,136,0.5);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4rem;
+    height: 68px;
+    background: rgba(2,4,9,0.92);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+  }
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900; font-size: 1.3rem;
+    color: var(--cyan); text-shadow: var(--glow-cyan);
+    letter-spacing: 0.2em; text-decoration: none;
+  }
+  .logo span { color: rgba(200,224,240,0.3); font-weight: 300; font-size: 0.85rem; }
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+    font-size: 0.8rem; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .nav-links a {
+    color: rgba(200,224,240,0.55); text-decoration: none;
+    transition: color 0.2s; position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px; background: var(--cyan);
+    transform: scaleX(0); transition: transform 0.2s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-links a.active { color: var(--cyan); }
+  .nav-links a.active::after { transform: scaleX(1); }
+  .nav-cta {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+    padding: 0.55rem 1.4rem;
+    border: 1px solid var(--cyan); color: var(--cyan); background: transparent;
+    text-decoration: none; text-transform: uppercase;
+    position: relative; overflow: hidden; transition: color 0.3s;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  }
+  .nav-cta::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--cyan);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s; z-index: -1;
+  }
+  .nav-cta:hover { color: var(--bg); }
+  .nav-cta:hover::before { transform: scaleX(1); }
+
+  /* ===== HAMBURGER ===== */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; z-index: 210; padding: 4px;
+  }
+  .hamburger span {
+    width: 22px; height: 1.5px; background: var(--cyan);
+    transition: all 0.3s; display: block;
+  }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+  .mobile-menu {
+    display: none; position: fixed;
+    top: 68px; right: 0;
+    background: rgba(7,13,24,0.97); backdrop-filter: blur(16px);
+    border: 1px solid var(--border); border-top: none;
+    z-index: 199; flex-direction: column; align-items: flex-start;
+    padding: 1.5rem 2rem; gap: 1.2rem; min-width: 220px;
+  }
+  .mobile-menu.active { display: flex; }
+  .mobile-menu a {
+    font-family: 'Orbitron', monospace; font-size: 0.72rem; font-weight: 700;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(200,224,240,0.6); text-decoration: none;
+    transition: color 0.2s; width: 100%; padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(0,245,255,0.06);
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--cyan); }
+
+  /* ===== PAGE HEADER ===== */
+  .page-header {
+    padding: 68px 0 0;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .page-header-inner {
+    padding: 5rem 4rem 4rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Animated corner lines */
+  .page-header::before {
+    content: '';
+    position: absolute;
+    top: 68px; right: 0;
+    width: 40%; height: 100%;
+    background: linear-gradient(135deg,
+      transparent 0%,
+      rgba(0,245,255,0.015) 50%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Decorative scan line */
+  .scan-line {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    animation: scanAcross 4s ease-in-out infinite;
+    opacity: 0.4;
+  }
+  @keyframes scanAcross {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .breadcrumb {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.25em;
+    color: rgba(200,224,240,0.28); text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .breadcrumb a { color: rgba(0,245,255,0.45); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--cyan); }
+  .breadcrumb span { color: rgba(200,224,240,0.2); }
+
+  .page-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 900; line-height: 1;
+    letter-spacing: -0.01em;
+    animation: fadeInUp 0.6s ease both;
+  }
+  .page-title .cyan { color: var(--cyan); text-shadow: var(--glow-cyan); }
+
+  .page-subtitle {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.3em;
+    color: var(--green); text-transform: uppercase;
+    margin-top: 1rem;
+    animation: fadeInUp 0.6s ease 0.15s both;
+  }
+
+  /* ===== MAIN CONTENT ===== */
+  .main-content {
+    padding: 6rem 4rem;
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  /* ===== LEFT COLUMN — IDENTITY CARD ===== */
+  .identity-card {
+    position: sticky;
+    top: calc(68px + 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .avatar-block {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .avatar-block::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--green));
+  }
+  .avatar-photo {
+    width: 100%; aspect-ratio: 1;
+    display: grid; place-items: center;
+    background: linear-gradient(135deg, rgba(0,245,255,0.04), rgba(0,255,136,0.02));
+    position: relative; overflow: hidden;
+  }
+  .avatar-photo::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 8px,
+      rgba(0,245,255,0.015) 8px, rgba(0,245,255,0.015) 9px
+    );
+  }
+  .avatar-letter {
+    font-family: 'Orbitron', monospace;
+    font-size: 7rem; font-weight: 900;
+    color: var(--cyan); text-shadow: var(--glow-cyan);
+    opacity: 0.6; z-index: 1;
+    /* Replace this div with: <img src="your-photo.jpg" ...> */
+  }
+  .avatar-meta {
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 0.6rem;
+  }
+  .meta-row {
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .meta-key {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.2em;
+    color: rgba(200,224,240,0.3); text-transform: uppercase;
+  }
+  .meta-val {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.68rem; color: var(--text);
+    letter-spacing: 0.05em;
+  }
+  .meta-val.green { color: var(--green); }
+  .meta-val.cyan { color: var(--cyan); }
+
+  /* Status indicator */
+  .status-indicator {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.85rem 1.25rem;
+    background: rgba(0,255,136,0.04);
+    border: 1px solid rgba(0,255,136,0.15);
+  }
+  .status-dot-pulse {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green); box-shadow: var(--glow-green);
+    flex-shrink: 0;
+    animation: pulse 2s ease infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+  .status-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.62rem; color: var(--green); letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  /* Cert stack */
+  .cert-stack {
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .cert-stack-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.25em;
+    color: rgba(200,224,240,0.25); text-transform: uppercase;
+    margin-bottom: 0.2rem;
+  }
+  .cert-pill {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.6rem 0.9rem;
+    background: var(--surface); border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .cert-pill:hover { border-color: rgba(0,245,255,0.3); }
+  .cert-pill-badge {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.55rem; font-weight: 700;
+    color: var(--green); letter-spacing: 0.05em;
+    white-space: nowrap;
+    background: rgba(0,255,136,0.06);
+    border: 1px solid rgba(0,255,136,0.2);
+    padding: 0.2rem 0.45rem;
+  }
+  .cert-pill-name {
+    font-size: 0.82rem; font-weight: 500;
+    color: rgba(200,224,240,0.65);
+  }
+  .cert-pill-check {
+    margin-left: auto;
+    color: var(--green); font-size: 0.75rem;
+  }
+
+  /* ===== RIGHT COLUMN ===== */
+  .content-col {
+    display: flex; flex-direction: column; gap: 4rem;
+  }
+
+  .section-block { position: relative; }
+
+  .section-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.35em;
+    color: var(--cyan); text-transform: uppercase;
+    margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-label::before { content: '//'; color: rgba(0,245,255,0.35); }
+
+  .section-heading {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 700; line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .body-text {
+    font-size: 1rem; font-weight: 300;
+    line-height: 1.95; color: rgba(200,224,240,0.62);
+    margin-bottom: 1.1rem;
+  }
+  .body-text:last-of-type { margin-bottom: 0; }
+
+  /* Highlight callout */
+  .callout {
+    margin: 1.5rem 0;
+    padding: 1.25rem 1.5rem;
+    border-left: 2px solid var(--cyan);
+    background: rgba(0,245,255,0.03);
+    font-size: 1.05rem; font-weight: 500;
+    color: rgba(200,224,240,0.8); line-height: 1.7;
+    font-style: italic;
+  }
+
+  /* ===== TIMELINE ===== */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 8px; bottom: 8px;
+    width: 1px; background: linear-gradient(180deg, var(--cyan), rgba(0,245,255,0.05));
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-dot {
+    position: absolute; left: -2rem;
+    top: 6px;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--cyan); box-shadow: var(--glow-cyan);
+    transform: translateX(-3px);
+  }
+  .timeline-dot.green { background: var(--green); box-shadow: var(--glow-green); }
+
+  .timeline-date {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem; letter-spacing: 0.2em;
+    color: rgba(0,245,255,0.45); text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .timeline-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.92rem; font-weight: 700;
+    color: #fff; margin-bottom: 0.3rem;
+  }
+  .timeline-sub {
+    font-size: 0.85rem; font-weight: 300;
+    color: rgba(200,224,240,0.42);
+    line-height: 1.6;
+  }
+
+  /* ===== SKILL MATRIX ===== */
+  .skill-matrix {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px; background: var(--border);
+  }
+
+  .skill-cell {
+    background: var(--surface);
+    padding: 1.5rem;
+    transition: background 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .skill-cell::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+    background: var(--cyan); transform: scaleY(0); transition: transform 0.3s;
+    transform-origin: bottom;
+  }
+  .skill-cell:hover { background: var(--dim); }
+  .skill-cell:hover::before { transform: scaleY(1); }
+
+  .skill-cell-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.72rem; font-weight: 700;
+    color: rgba(200,224,240,0.8);
+    margin-bottom: 0.75rem; letter-spacing: 0.04em;
+  }
+
+  .skill-bar-wrap {
+    height: 2px; background: rgba(0,245,255,0.08);
+    margin-bottom: 0.4rem; position: relative;
+  }
+  .skill-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--green));
+    box-shadow: 0 0 8px rgba(0,245,255,0.4);
+    animation: growBar 1.2s ease both;
+    transform-origin: left;
+  }
+  @keyframes growBar {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  .skill-bar-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.58rem; color: rgba(200,224,240,0.28);
+    letter-spacing: 0.1em; text-transform: uppercase;
+  }
+
+  /* ===== INTERESTS GRID ===== */
+  .interests-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: var(--border);
+  }
+
+  .interest-cell {
+    background: var(--surface);
+    padding: 1.5rem 1.25rem;
+    text-align: center;
+    transition: background 0.25s;
+    cursor: default;
+  }
+  .interest-cell:hover { background: var(--dim); }
+
+  .interest-icon {
+    font-size: 1.6rem; margin-bottom: 0.75rem;
+    display: block;
+    filter: grayscale(0.3);
+  }
+  .interest-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.62rem; font-weight: 700;
+    color: rgba(200,224,240,0.55); letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .interest-desc {
+    font-size: 0.78rem; font-weight: 300;
+    color: rgba(200,224,240,0.28);
+    margin-top: 0.35rem; line-height: 1.5;
+  }
+
+  /* ===== GOALS / NEXT TARGETS ===== */
+  .targets-list {
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .target-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface); border: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .target-item:hover { border-color: rgba(0,245,255,0.25); }
+
+  .target-icon {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem; color: var(--cyan);
+    min-width: 1.5rem; padding-top: 0.15rem;
+  }
+  .target-text {
+    flex: 1;
+    font-size: 0.92rem; font-weight: 300;
+    color: rgba(200,224,240,0.65); line-height: 1.6;
+  }
+  .target-text strong {
+    color: rgba(200,224,240,0.9); font-weight: 700;
+    font-family: 'Orbitron', monospace; font-size: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+  .target-badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.1em;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid rgba(0,245,255,0.2);
+    color: rgba(0,245,255,0.45);
+    white-space: nowrap; align-self: center;
+    text-transform: uppercase;
+  }
+  .target-badge.soon { border-color: rgba(0,255,136,0.2); color: rgba(0,255,136,0.55); }
+
+  /* ===== CTA STRIP ===== */
+  .cta-strip {
+    margin-top: 2rem;
+    padding: 3rem 4rem;
+    background: rgba(0,245,255,0.02);
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem;
+  }
+  .cta-strip-text h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.2rem; font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .cta-strip-text p {
+    font-size: 0.9rem; font-weight: 300;
+    color: rgba(200,224,240,0.45);
+  }
+  .cta-strip-actions { display: flex; gap: 1rem; flex-shrink: 0; }
+
+  .btn-primary {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+    padding: 0.85rem 1.6rem;
+    background: var(--cyan); color: var(--bg);
+    border: none; text-decoration: none; text-transform: uppercase;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    transition: box-shadow 0.2s; cursor: pointer; display: inline-block;
+  }
+  .btn-primary:hover { box-shadow: var(--glow-cyan); }
+
+  .btn-secondary {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+    padding: 0.85rem 1.6rem;
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border); text-decoration: none; text-transform: uppercase;
+    transition: border-color 0.2s, color 0.2s; cursor: pointer; display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    position: relative; z-index: 1;
+    background: rgba(0,0,0,0.4); border-top: 1px solid var(--border);
+    padding: 2.5rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Orbitron', monospace; font-size: 0.9rem; font-weight: 900;
+    color: var(--cyan); opacity: 0.45; letter-spacing: 0.2em;
+  }
+  .footer-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem; color: rgba(200,224,240,0.18); letter-spacing: 0.1em;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== SCROLL REVEAL ===== */
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 960px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+
+    .page-header-inner { padding: 4rem 1.5rem 3rem; }
+
+    .main-content {
+      grid-template-columns: 1fr;
+      padding: 4rem 1.5rem;
+      gap: 3rem;
+    }
+
+    .identity-card { position: static; }
+
+    .skill-matrix { grid-template-columns: 1fr; }
+    .interests-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .cta-strip {
+      flex-direction: column; align-items: flex-start;
+      padding: 2.5rem 1.5rem;
+    }
+    .cta-strip-actions { flex-wrap: wrap; }
+
+    footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 2rem 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .interests-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">KIERAN <span>// SECURITY</span></a>
+  <ul class="nav-links">
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="certifications.html">Certifications</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Hire Me</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+  <a href="certifications.html" onclick="toggleMenu()">Certifications</a>
+  <a href="projects.html" onclick="toggleMenu()">Projects</a>
+  <a href="contact.html" onclick="toggleMenu()">Contact</a>
+  <a href="contact.html" onclick="toggleMenu()" style="color:var(--cyan);padding-top:0.6rem;">Hire Me</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="scan-line"></div>
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span>/</span>
+      <span style="color:rgba(200,224,240,0.5)">About</span>
+    </div>
+    <h1 class="page-title">ABOUT <span class="cyan">ME.</span></h1>
+    <div class="page-subtitle">// Cybersecurity Student — Builder — Defender</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-content">
+
+  <!-- LEFT: Identity Card -->
+  <aside class="identity-card">
+
+    <div class="avatar-block">
+      <div class="avatar-photo">
+        <!-- Swap the div below for: <img src="your-photo.jpg" alt="Kieran" style="width:100%;height:100%;object-fit:cover;display:block;"> -->
+        <div class="avatar-letter">K</div>
+      </div>
+      <div class="avatar-meta">
+        <div class="meta-row">
+          <span class="meta-key">Name</span>
+          <span class="meta-val">Kieran</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Role</span>
+          <span class="meta-val cyan">Security Student</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Focus</span>
+          <span class="meta-val">Offensive + Defensive</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Availability</span>
+          <span class="meta-val green">Open to Work</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="status-indicator">
+      <div class="status-dot-pulse"></div>
+      <span class="status-text">Actively seeking opportunities</span>
+    </div>
+
+    <div class="cert-stack">
+      <div class="cert-stack-label">// Verified Credentials</div>
+      <div class="cert-pill">
+        <span class="cert-pill-badge">CompTIA</span>
+        <span class="cert-pill-name">A+ Core 1 &amp; 2</span>
+        <span class="cert-pill-check">✓</span>
+      </div>
+      <div class="cert-pill">
+        <span class="cert-pill-badge">CompTIA</span>
+        <span class="cert-pill-name">Network+</span>
+        <span class="cert-pill-check">✓</span>
+      </div>
+      <div class="cert-pill">
+        <span class="cert-pill-badge">CompTIA</span>
+        <span class="cert-pill-name">Security+</span>
+        <span class="cert-pill-check">✓</span>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- RIGHT: Content -->
+  <div class="content-col">
+
+    <!-- WHO I AM -->
+    <div class="section-block reveal">
+      <div class="section-label">Who I Am</div>
+      <h2 class="section-heading">THE FULL PICTURE.</h2>
+      <p class="body-text">
+        I'm a cybersecurity student who got into this field because I couldn't stop asking "how does that actually work?" — and once I started finding the answers, I couldn't stop. I've always been pulled toward understanding systems at a deep level, which makes security a natural fit.
+      </p>
+      <div class="callout">
+        "I don't just study for exams — I build labs, break things intentionally, and learn from what happens."
+      </div>
+      <p class="body-text">
+        I recently earned the CompTIA trifecta: A+, Network+, and Security+. That's not the finish line — it's the foundation. I'm already working toward my next certs while simultaneously building hands-on projects that prove what I know, not just what I can memorise.
+      </p>
+      <p class="body-text">
+        I'm looking for an environment where I can contribute real work, keep learning at pace, and work alongside people who take security seriously. If that's you — let's talk.
+      </p>
+    </div>
+
+    <!-- JOURNEY / TIMELINE -->
+    <div class="section-block reveal">
+      <div class="section-label">My Journey</div>
+      <h2 class="section-heading">HOW I GOT HERE.</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">The Beginning</div>
+          <div class="timeline-title">Fell Down the Rabbit Hole</div>
+          <div class="timeline-sub">Started digging into how networks actually work — subnetting, protocols, packet flows. What started as curiosity became an obsession.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot green"></div>
+          <div class="timeline-date">Cert #1</div>
+          <div class="timeline-title">CompTIA A+ Earned</div>
+          <div class="timeline-sub">Hardware, OS fundamentals, troubleshooting. Built the IT foundation that everything else sits on top of.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot green"></div>
+          <div class="timeline-date">Cert #2</div>
+          <div class="timeline-title">CompTIA Network+ Earned</div>
+          <div class="timeline-sub">Deep dived into networking — TCP/IP stack, routing, switching, VLANs, network security architecture. This one changed how I see everything.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot green"></div>
+          <div class="timeline-date">Cert #3</div>
+          <div class="timeline-title">CompTIA Security+ Earned</div>
+          <div class="timeline-sub">Threats, attacks, risk management, cryptography, identity. The DoD-approved cert that opened the door to security-specific roles.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Now</div>
+          <div class="timeline-title">Building & Levelling Up</div>
+          <div class="timeline-sub">Running home labs, building portfolio projects, studying toward the next certification. The grind continues.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILL MATRIX -->
+    <div class="section-block reveal">
+      <div class="section-label">Technical Skills</div>
+      <h2 class="section-heading">WHAT I BRING.</h2>
+      <div class="skill-matrix">
+        <div class="skill-cell">
+          <div class="skill-cell-name">Network Security</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div>
+          <div class="skill-bar-label">Proficient</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-cell-name">TCP/IP &amp; Protocols</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:88%"></div></div>
+          <div class="skill-bar-label">Strong</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-cell-name">Linux CLI</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:72%"></div></div>
+          <div class="skill-bar-label">Comfortable</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-cell-name">Wireshark / Packet Analysis</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div>
+          <div class="skill-bar-label">Comfortable</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-cell-name">Threat Analysis</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div>
+          <div class="skill-bar-label">Proficient</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-cell-name">Incident Response</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:65%"></div></div>
+          <div class="skill-bar-label">Learning</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-cell-name">Cryptography Concepts</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div>
+          <div class="skill-bar-label">Solid</div>
+        </div>
+        <div class="skill-cell">
+          <div class="skill-cell-name">Virtualisation / Labs</div>
+          <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div>
+          <div class="skill-bar-label">Regular Practice</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHAT DRIVES ME -->
+    <div class="section-block reveal">
+      <div class="section-label">Interests</div>
+      <h2 class="section-heading">WHAT DRIVES ME.</h2>
+      <div class="interests-grid">
+        <div class="interest-cell">
+          <span class="interest-icon">🔴</span>
+          <div class="interest-name">Offensive Security</div>
+          <div class="interest-desc">Thinking like an attacker to understand how defences can fail</div>
+        </div>
+        <div class="interest-cell">
+          <span class="interest-icon">🛡️</span>
+          <div class="interest-name">Blue Team</div>
+          <div class="interest-desc">Detection, response, and hardening systems against real threats</div>
+        </div>
+        <div class="interest-cell">
+          <span class="interest-icon">🔬</span>
+          <div class="interest-name">Malware Analysis</div>
+          <div class="interest-desc">Understanding malicious code to build better defences</div>
+        </div>
+        <div class="interest-cell">
+          <span class="interest-icon">🌐</span>
+          <div class="interest-name">Network Forensics</div>
+          <div class="interest-desc">Reading traffic to find what shouldn't be there</div>
+        </div>
+        <div class="interest-cell">
+          <span class="interest-icon">⚙️</span>
+          <div class="interest-name">Home Labs</div>
+          <div class="interest-desc">Building environments to test, break, and learn from</div>
+        </div>
+        <div class="interest-cell">
+          <span class="interest-icon">📚</span>
+          <div class="interest-name">Continuous Learning</div>
+          <div class="interest-desc">Certs, CTFs, writeups — always something new to study</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NEXT TARGETS -->
+    <div class="section-block reveal">
+      <div class="section-label">What's Next</div>
+      <h2 class="section-heading">THE ROADMAP.</h2>
+      <div class="targets-list">
+        <div class="target-item">
+          <span class="target-icon">&gt;_</span>
+          <div class="target-text">
+            <strong>CEH or eJPT</strong> — Next certification target to move into more hands-on offensive security territory
+          </div>
+          <span class="target-badge soon">Up Next</span>
+        </div>
+        <div class="target-item">
+          <span class="target-icon">&gt;_</span>
+          <div class="target-text">
+            <strong>CTF Competitions</strong> — Actively participating in Capture The Flag events to sharpen practical skills
+          </div>
+          <span class="target-badge">In Progress</span>
+        </div>
+        <div class="target-item">
+          <span class="target-icon">&gt;_</span>
+          <div class="target-text">
+            <strong>Home Lab Expansion</strong> — Building out a dedicated lab environment with attack and defend simulations
+          </div>
+          <span class="target-badge">In Progress</span>
+        </div>
+        <div class="target-item">
+          <span class="target-icon">&gt;_</span>
+          <div class="target-text">
+            <strong>First Security Role</strong> — Internship, junior analyst, or SOC position to start building professional experience
+          </div>
+          <span class="target-badge soon">Goal</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content-col -->
+
+</div><!-- /main-content -->
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <div class="cta-strip-text">
+    <h3>Ready to work together?</h3>
+    <p>Open to internships, junior roles, and interesting projects. Let's build something.</p>
+  </div>
+  <div class="cta-strip-actions">
+    <a href="projects.html" class="btn-secondary">See My Work</a>
+    <a href="contact.html" class="btn-primary">Get In Touch</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">KIERAN</div>
+  <div class="footer-text">CYBERSECURITY STUDENT — COMPTIA A+ · NET+ · SEC+</div>
+  <div class="footer-text">BUILT WITH CLAUDE &nbsp;|&nbsp; HOSTED ON NETLIFY</div>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('active');
+  document.getElementById('mobileMenu').classList.toggle('active');
+}
+
+/* Scroll reveal */
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

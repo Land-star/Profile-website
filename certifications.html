@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certifications — KIERAN // SECURITY</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;500;700&family=Orbitron:wght@400;700;900&display=swap');
+
+  :root {
+    --bg: #020409;
+    --surface: #070d18;
+    --cyan: #00f5ff;
+    --green: #00ff88;
+    --red: #ff2244;
+    --dim: #0a1628;
+    --border: rgba(0,245,255,0.15);
+    --text: #c8e0f0;
+    --glow-cyan: 0 0 20px rgba(0,245,255,0.5), 0 0 60px rgba(0,245,255,0.2);
+    --glow-green: 0 0 20px rgba(0,255,136,0.5);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden; cursor: crosshair;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.07) 2px, rgba(0,0,0,0.07) 4px);
+    pointer-events: none; z-index: 9999;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4rem; height: 68px;
+    background: rgba(2,4,9,0.92); border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+  }
+  .logo { font-family: 'Orbitron', monospace; font-weight: 900; font-size: 1.3rem; color: var(--cyan); text-shadow: var(--glow-cyan); letter-spacing: 0.2em; text-decoration: none; }
+  .logo span { color: rgba(200,224,240,0.3); font-weight: 300; font-size: 0.85rem; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; }
+  .nav-links a { color: rgba(200,224,240,0.55); text-decoration: none; transition: color 0.2s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--cyan); transform: scaleX(0); transition: transform 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+  .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+  .nav-cta { font-family: 'Orbitron', monospace; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; padding: 0.55rem 1.4rem; border: 1px solid var(--cyan); color: var(--cyan); background: transparent; text-decoration: none; text-transform: uppercase; position: relative; overflow: hidden; transition: color 0.3s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%); }
+  .nav-cta::before { content: ''; position: absolute; inset: 0; background: var(--cyan); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; z-index: -1; }
+  .nav-cta:hover { color: var(--bg); }
+  .nav-cta:hover::before { transform: scaleX(1); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 210; padding: 4px; }
+  .hamburger span { width: 22px; height: 1.5px; background: var(--cyan); transition: all 0.3s; display: block; }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+  .mobile-menu { display: none; position: fixed; top: 68px; right: 0; background: rgba(7,13,24,0.97); backdrop-filter: blur(16px); border: 1px solid var(--border); border-top: none; z-index: 199; flex-direction: column; align-items: flex-start; padding: 1.5rem 2rem; gap: 1.2rem; min-width: 220px; }
+  .mobile-menu.active { display: flex; }
+  .mobile-menu a { font-family: 'Orbitron', monospace; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(200,224,240,0.6); text-decoration: none; transition: color 0.2s; width: 100%; padding: 0.4rem 0; border-bottom: 1px solid rgba(0,245,255,0.06); }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--cyan); }
+
+  /* PAGE HEADER */
+  .page-header { padding: 68px 0 0; position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+  .page-header-inner { padding: 5rem 4rem 4rem; position: relative; z-index: 2; }
+  .scan-line { position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); animation: scanAcross 4s ease-in-out infinite; opacity: 0.4; }
+  @keyframes scanAcross { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+  .breadcrumb { font-family: 'Share Tech Mono', monospace; font-size: 0.62rem; letter-spacing: 0.25em; color: rgba(200,224,240,0.28); text-transform: uppercase; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem; }
+  .breadcrumb a { color: rgba(0,245,255,0.45); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--cyan); }
+  .breadcrumb span { color: rgba(200,224,240,0.2); }
+  .page-title { font-family: 'Orbitron', monospace; font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 900; line-height: 1; letter-spacing: -0.01em; animation: fadeInUp 0.6s ease both; }
+  .page-title .cyan { color: var(--cyan); text-shadow: var(--glow-cyan); }
+  .page-subtitle { font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; letter-spacing: 0.3em; color: var(--green); text-transform: uppercase; margin-top: 1rem; animation: fadeInUp 0.6s ease 0.15s both; }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+  }
+  .stat-block {
+    padding: 2rem 4rem; border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .stat-block:last-child { border-right: none; }
+  .stat-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--cyan); transform: scaleX(0); transition: transform 0.4s; }
+  .stat-block:hover::before { transform: scaleX(1); }
+  .stat-num { font-family: 'Orbitron', monospace; font-size: 2rem; font-weight: 900; color: var(--cyan); text-shadow: var(--glow-cyan); display: block; }
+  .stat-label { font-family: 'Share Tech Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; color: rgba(200,224,240,0.3); text-transform: uppercase; margin-top: 0.2rem; }
+
+  /* SECTION */
+  .section { padding: 6rem 4rem; border-top: 1px solid var(--border); }
+  .section-label { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; letter-spacing: 0.35em; color: var(--cyan); text-transform: uppercase; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.6rem; }
+  .section-label::before { content: '//'; color: rgba(0,245,255,0.35); }
+  .section-heading { font-family: 'Orbitron', monospace; font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-weight: 700; line-height: 1.1; margin-bottom: 3rem; }
+
+  /* EARNED CERTS — big cards */
+  .earned-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px; background: var(--border);
+  }
+
+  .cert-card-big {
+    background: var(--surface);
+    padding: 0;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+    display: flex; flex-direction: column;
+  }
+  .cert-card-big:hover { background: var(--dim); }
+
+  .cert-top-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--green), var(--cyan));
+  }
+  .cert-card-big.sec-plus .cert-top-bar {
+    background: linear-gradient(90deg, var(--cyan), var(--green), var(--cyan));
+  }
+
+  .cert-card-body { padding: 2.5rem; flex: 1; display: flex; flex-direction: column; }
+
+  .cert-logo-area {
+    display: flex; align-items: center; gap: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  .cert-emblem {
+    width: 64px; height: 64px;
+    border: 1px solid rgba(0,255,136,0.3);
+    display: grid; place-items: center;
+    background: rgba(0,255,136,0.04);
+    font-family: 'Orbitron', monospace;
+    font-size: 0.52rem; font-weight: 700;
+    color: var(--green); text-align: center; line-height: 1.4;
+    flex-shrink: 0;
+  }
+  .cert-card-big.sec-plus .cert-emblem { border-color: rgba(0,245,255,0.4); background: rgba(0,245,255,0.06); color: var(--cyan); }
+
+  .cert-issuer-tag { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: rgba(0,255,136,0.5); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.2rem; }
+  .cert-card-big.sec-plus .cert-issuer-tag { color: rgba(0,245,255,0.55); }
+  .cert-full-name { font-family: 'Orbitron', monospace; font-size: 1.1rem; font-weight: 700; color: #fff; letter-spacing: 0.03em; }
+
+  .cert-desc { font-size: 0.875rem; line-height: 1.8; color: rgba(200,224,240,0.45); font-weight: 300; flex: 1; margin-bottom: 2rem; }
+
+  .cert-topics { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2rem; }
+  .cert-topic {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.58rem;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid rgba(0,245,255,0.1);
+    background: rgba(0,245,255,0.03);
+    color: rgba(0,245,255,0.4); letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .cert-footer {
+    padding: 1.25rem 2.5rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(0,0,0,0.2);
+  }
+  .cert-status-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'Share Tech Mono', monospace; font-size: 0.62rem;
+    color: var(--green); letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .cert-status-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: var(--glow-green); }
+  .cert-date { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: rgba(200,224,240,0.25); letter-spacing: 0.12em; }
+
+  /* ROADMAP — upcoming certs */
+  .roadmap-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1.5px; background: var(--border);
+  }
+
+  .roadmap-card {
+    background: var(--surface); padding: 2rem;
+    position: relative; overflow: hidden;
+    border: none; transition: background 0.3s;
+    display: flex; gap: 1.5rem; align-items: flex-start;
+  }
+  .roadmap-card:hover { background: var(--dim); }
+  .roadmap-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--cyan); transform: scaleX(0); transition: transform 0.4s; }
+  .roadmap-card:hover::before { transform: scaleX(1); }
+
+  .roadmap-num {
+    font-family: 'Orbitron', monospace; font-size: 2.2rem; font-weight: 900;
+    color: rgba(0,245,255,0.08); line-height: 1; flex-shrink: 0; min-width: 2.5rem;
+  }
+  .roadmap-content { flex: 1; }
+  .roadmap-priority {
+    font-family: 'Share Tech Mono', monospace; font-size: 0.58rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .roadmap-priority.hot { color: var(--red); }
+  .roadmap-priority.next { color: var(--cyan); }
+  .roadmap-priority.planned { color: rgba(200,224,240,0.3); }
+  .roadmap-name { font-family: 'Orbitron', monospace; font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+  .roadmap-desc { font-size: 0.85rem; font-weight: 300; color: rgba(200,224,240,0.4); line-height: 1.7; }
+  .roadmap-eta { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: rgba(0,245,255,0.3); letter-spacing: 0.15em; margin-top: 0.75rem; }
+
+  /* LEARNING PATH visual */
+  .path-strip {
+    background: rgba(0,245,255,0.015);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 4rem;
+    overflow: hidden;
+  }
+  .path-track {
+    display: flex; align-items: center; gap: 0; overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+  .path-track::-webkit-scrollbar { height: 2px; }
+  .path-track::-webkit-scrollbar-track { background: rgba(0,245,255,0.05); }
+  .path-track::-webkit-scrollbar-thumb { background: var(--cyan); }
+
+  .path-node {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.6rem; flex-shrink: 0; min-width: 110px;
+  }
+  .path-bubble {
+    width: 52px; height: 52px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-family: 'Orbitron', monospace; font-size: 0.5rem; font-weight: 700;
+    text-align: center; line-height: 1.3;
+    border: 1px solid;
+  }
+  .path-bubble.done { background: rgba(0,255,136,0.1); border-color: var(--green); color: var(--green); box-shadow: 0 0 12px rgba(0,255,136,0.25); }
+  .path-bubble.active { background: rgba(0,245,255,0.1); border-color: var(--cyan); color: var(--cyan); box-shadow: var(--glow-cyan); animation: pathPulse 2s ease infinite; }
+  .path-bubble.future { background: transparent; border-color: rgba(0,245,255,0.15); color: rgba(200,224,240,0.2); }
+  @keyframes pathPulse { 0%,100%{box-shadow:0 0 12px rgba(0,245,255,0.3)} 50%{box-shadow:0 0 24px rgba(0,245,255,0.6)} }
+
+  .path-label { font-family: 'Share Tech Mono', monospace; font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; color: rgba(200,224,240,0.35); }
+
+  .path-arrow { font-size: 0.75rem; color: rgba(0,245,255,0.2); flex-shrink: 0; margin: 0 0.25rem; padding-bottom: 1.8rem; }
+
+  /* CTA */
+  .cta-strip { padding: 3rem 4rem; background: rgba(0,245,255,0.02); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+  .cta-strip-text h3 { font-family: 'Orbitron', monospace; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .cta-strip-text p { font-size: 0.9rem; font-weight: 300; color: rgba(200,224,240,0.45); }
+  .cta-strip-actions { display: flex; gap: 1rem; flex-shrink: 0; }
+  .btn-primary { font-family: 'Orbitron', monospace; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; padding: 0.85rem 1.6rem; background: var(--cyan); color: var(--bg); border: none; text-decoration: none; text-transform: uppercase; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%); transition: box-shadow 0.2s; cursor: pointer; display: inline-block; }
+  .btn-primary:hover { box-shadow: var(--glow-cyan); }
+  .btn-secondary { font-family: 'Orbitron', monospace; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; padding: 0.85rem 1.6rem; background: transparent; color: var(--text); border: 1px solid var(--border); text-decoration: none; text-transform: uppercase; transition: border-color 0.2s, color 0.2s; cursor: pointer; display: inline-block; }
+  .btn-secondary:hover { border-color: var(--cyan); color: var(--cyan); }
+
+  /* FOOTER */
+  footer { background: rgba(0,0,0,0.4); border-top: 1px solid var(--border); padding: 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; }
+  .footer-logo { font-family: 'Orbitron', monospace; font-size: 0.9rem; font-weight: 900; color: var(--cyan); opacity: 0.45; letter-spacing: 0.2em; }
+  .footer-text { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: rgba(200,224,240,0.18); letter-spacing: 0.1em; }
+
+  @keyframes fadeInUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 960px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .page-header-inner { padding: 4rem 1.5rem 3rem; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat-block { padding: 1.5rem 1.5rem; }
+    .section { padding: 4rem 1.5rem; }
+    .earned-grid { grid-template-columns: 1fr; }
+    .roadmap-grid { grid-template-columns: 1fr; }
+    .path-strip { padding: 2rem 1.5rem; }
+    .cta-strip { flex-direction: column; align-items: flex-start; padding: 2.5rem 1.5rem; }
+    footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">KIERAN <span>// SECURITY</span></a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="certifications.html" class="active">Certifications</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Hire Me</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">Home</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
+  <a href="certifications.html" onclick="toggleMenu()">Certifications</a>
+  <a href="projects.html" onclick="toggleMenu()">Projects</a>
+  <a href="contact.html" onclick="toggleMenu()">Contact</a>
+  <a href="contact.html" onclick="toggleMenu()" style="color:var(--cyan);padding-top:0.6rem;">Hire Me</a>
+</div>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="scan-line"></div>
+  <div class="page-header-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span>/</span>
+      <span style="color:rgba(200,224,240,0.5)">Certifications</span>
+    </div>
+    <h1 class="page-title">CERTS &amp; <span class="cyan">CREDENTIALS.</span></h1>
+    <div class="page-subtitle">// CompTIA Trifecta Certified — More Incoming</div>
+  </div>
+  <div class="stats-bar">
+    <div class="stat-block">
+      <span class="stat-num">3</span>
+      <div class="stat-label">Earned Certs</div>
+    </div>
+    <div class="stat-block">
+      <span class="stat-num">3+</span>
+      <div class="stat-label">Planned Next</div>
+    </div>
+    <div class="stat-block">
+      <span class="stat-num">DoD</span>
+      <div class="stat-label">8570 Approved</div>
+    </div>
+    <div class="stat-block">
+      <span class="stat-num">∞</span>
+      <div class="stat-label">Drive to Learn</div>
+    </div>
+  </div>
+</div>
+
+<!-- LEARNING PATH STRIP -->
+<div class="path-strip">
+  <div class="section-label" style="margin-bottom:1.5rem">// Certification Path</div>
+  <div class="path-track">
+    <div class="path-node">
+      <div class="path-bubble done">CompTIA<br>A+</div>
+      <div class="path-label">Foundation</div>
+    </div>
+    <div class="path-arrow">——›</div>
+    <div class="path-node">
+      <div class="path-bubble done">CompTIA<br>Net+</div>
+      <div class="path-label">Networking</div>
+    </div>
+    <div class="path-arrow">——›</div>
+    <div class="path-node">
+      <div class="path-bubble done">CompTIA<br>Sec+</div>
+      <div class="path-label">Security</div>
+    </div>
+    <div class="path-arrow">——›</div>
+    <div class="path-node">
+      <div class="path-bubble active">Next<br>Cert</div>
+      <div class="path-label">In Progress</div>
+    </div>
+    <div class="path-arrow">——›</div>
+    <div class="path-node">
+      <div class="path-bubble future">CEH /<br>OSCP</div>
+      <div class="path-label">Offensive</div>
+    </div>
+    <div class="path-arrow">——›</div>
+    <div class="path-node">
+      <div class="path-bubble future">CySA+ /<br>CASP+</div>
+      <div class="path-label">Advanced</div>
+    </div>
+    <div class="path-arrow">——›</div>
+    <div class="path-node">
+      <div class="path-bubble future">???</div>
+      <div class="path-label">Ongoing</div>
+    </div>
+  </div>
+</div>
+
+<!-- EARNED CERTS -->
+<div class="section reveal">
+  <div class="section-label">Verified &amp; Earned</div>
+  <h2 class="section-heading">THE COMPTIA TRIFECTA.</h2>
+  <div class="earned-grid">
+
+    <div class="cert-card-big">
+      <div class="cert-top-bar"></div>
+      <div class="cert-card-body">
+        <div class="cert-logo-area">
+          <div class="cert-emblem">CompTIA<br>A+</div>
+          <div>
+            <div class="cert-issuer-tag">CompTIA</div>
+            <div class="cert-full-name">A+ Core 1 &amp; Core 2</div>
+          </div>
+        </div>
+        <p class="cert-desc">The industry entry point for IT professionals. Covers hardware, networking fundamentals, operating systems, virtualisation, cloud basics, security, and troubleshooting across a wide range of devices and environments.</p>
+        <div class="cert-topics">
+          <span class="cert-topic">Hardware</span>
+          <span class="cert-topic">OS</span>
+          <span class="cert-topic">Networking</span>
+          <span class="cert-topic">Security</span>
+          <span class="cert-topic">Troubleshooting</span>
+          <span class="cert-topic">Cloud</span>
+        </div>
+      </div>
+      <div class="cert-footer">
+        <div class="cert-status-badge">Verified</div>
+        <div class="cert-date">EARNED MM/YYYY · EXPIRES MM/YYYY</div>
+      </div>
+    </div>
+
+    <div class="cert-card-big">
+      <div class="cert-top-bar"></div>
+      <div class="cert-card-body">
+        <div class="cert-logo-area">
+          <div class="cert-emblem">CompTIA<br>Net+</div>
+          <div>
+            <div class="cert-issuer-tag">CompTIA</div>
+            <div class="cert-full-name">Network+</div>
+          </div>
+        </div>
+        <p class="cert-desc">Validates core networking skills essential for any IT or security role. Covers network infrastructure, protocols, routing and switching, network security, and troubleshooting modern environments.</p>
+        <div class="cert-topics">
+          <span class="cert-topic">TCP/IP</span>
+          <span class="cert-topic">Routing</span>
+          <span class="cert-topic">Switching</span>
+          <span class="cert-topic">VLANs</span>
+          <span class="cert-topic">Firewalls</span>
+          <span class="cert-topic">DNS / DHCP</span>
+        </div>
+      </div>
+      <div class="cert-footer">
+        <div class="cert-status-badge">Verified</div>
+        <div class="cert-date">EARNED MM/YYYY · EXPIRES MM/YYYY</div>
+      </div>
+    </div>
+
+    <div class="cert-card-big sec-plus">
+      <div class="cert-top-bar"></div>
+      <div class="cert-card-body">
+        <div class="cert-logo-area">
+          <div class="cert-emblem">CompTIA<br>Sec+</div>
+          <div>
+            <div class="cert-issuer-tag">CompTIA</div>
+            <div class="cert-full-name">Security+</div>
+          </div>
+        </div>
+        <p class="cert-desc">The gold standard entry-level security certification. DoD 8570 approved and globally recognised. Covers threats, attacks, vulnerabilities, risk management, cryptography, and identity management.</p>
+        <div class="cert-topics">
+          <span class="cert-topic">Threats &amp; Attacks</span>
+          <span class="cert-topic">Cryptography</span>
+          <span class="cert-topic">PKI</span>
+          <span class="cert-topic">IAM</span>
+          <span class="cert-topic">Risk Mgmt</span>
+          <span class="cert-topic">Incident Response</span>
+        </div>
+      </div>
+      <div class="cert-footer">
+        <div class="cert-status-badge">Verified</div>
+        <div class="cert-date">EARNED MM/YYYY · EXPIRES MM/YYYY</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ROADMAP -->
+<div class="section reveal" style="background: rgba(0,245,255,0.008);">
+  <div class="section-label">What's Coming</div>
+  <h2 class="section-heading">THE ROADMAP.</h2>
+  <div class="roadmap-grid">
+
+    <div class="roadmap-card">
+      <div class="roadmap-num">01</div>
+      <div class="roadmap-content">
+        <div class="roadmap-priority hot">▲ Top Priority</div>
+        <div class="roadmap-name">eJPT — eLearnSecurity Junior Penetration Tester</div>
+        <div class="roadmap-desc">Hands-on, practical penetration testing cert. No multiple choice — real machines, real techniques. The next step into offensive security.</div>
+        <div class="roadmap-eta">// Target: 2025</div>
+      </div>
+    </div>
+
+    <div class="roadmap-card">
+      <div class="roadmap-num">02</div>
+      <div class="roadmap-content">
+        <div class="roadmap-priority next">› Next Up</div>
+        <div class="roadmap-name">CEH — Certified Ethical Hacker</div>
+        <div class="roadmap-desc">EC-Council's recognised ethical hacking cert. Covers reconnaissance, scanning, exploitation, and post-exploitation methodology.</div>
+        <div class="roadmap-eta">// Target: 2025–2026</div>
+      </div>
+    </div>
+
+    <div class="roadmap-card">
+      <div class="roadmap-num">03</div>
+      <div class="roadmap-content">
+        <div class="roadmap-priority next">› Planned</div>
+        <div class="roadmap-name">CompTIA CySA+ — Cybersecurity Analyst</div>
+        <div class="roadmap-desc">Detection, analysis, and response. The natural next step in the CompTIA pathway — bridging Security+ to advanced analyst roles.</div>
+        <div class="roadmap-eta">// Target: 2026</div>
+      </div>
+    </div>
+
+    <div class="roadmap-card">
+      <div class="roadmap-num">04</div>
+      <div class="roadmap-content">
+        <div class="roadmap-priority planned">— Long-Term</div>
+        <div class="roadmap-name">OSCP — Offensive Security Certified Professional</div>
+        <div class="roadmap-desc">The most respected offensive security cert in the industry. 24-hour hands-on exam. A long-term goal and the benchmark to work toward.</div>
+        <div class="roadmap-eta">// Target: Future</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <div class="cta-strip-text">
+    <h3>See the skills in action.</h3>
+    <p>Credentials are the foundation — projects are the proof.</p>
+  </div>
+  <div class="cta-strip-actions">
+    <a href="about.html" class="btn-secondary">About Me</a>
+    <a href="projects.html" class="btn-primary">View Projects</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">KIERAN</div>
+  <div class="footer-text">CYBERSECURITY STUDENT — COMPTIA A+ · NET+ · SEC+</div>
+  <div class="footer-text">BUILT WITH CLAUDE &nbsp;|&nbsp; HOSTED ON NETLIFY</div>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('hamburger').classList.toggle('active');
+  document.getElementById('mobileMenu').classList.toggle('active');
+}
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
