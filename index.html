@@ -816,7 +816,7 @@
 <nav>
   <div class="logo">KIERAN <span>// SECURITY</span></div>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
+    <li><a href="about.html">About</a></li>
     <li><a href="#certs">Certifications</a></li>
     <li><a href="projects.html">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -830,7 +830,7 @@
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html" onclick="toggleMenu()">Home</a>
-  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="about.html" onclick="toggleMenu()">About</a>
   <a href="#certs" onclick="toggleMenu()">Certifications</a>
   <a href="projects.html" onclick="toggleMenu()">Projects</a>
   <a href="#contact" onclick="toggleMenu()">Contact</a>
@@ -864,7 +864,7 @@
   <div class="hero-content">
     <div class="hero-tag">// Cybersecurity Student &amp; CompTIA Certified</div>
     <h1 class="hero-title">
-      <span class="block">HI, I'M</span>
+      <span class="block"></span>
       <span class="block cyan">KIERAN.</span>
       <span class="block">BREAKING THINGS</span>
       <span class="sub">TO MAKE THEM STRONGER.</span>
@@ -1003,11 +1003,11 @@
       Whether you're hiring, collaborating, or just want to talk security — my inbox is open. Actively looking for internships, junior roles, and interesting projects.
     </p>
     <div class="contact-links">
-      <a href="/cdn-cgi/l/email-protection#bbc2d4cec9fbded6dad2d795d8d4d6" class="contact-link">
+      <a href="mailto:your.email@example.com" class="contact-link">
         <div class="contact-link-icon">✉</div>
         <div>
           <span class="contact-link-label">Email</span>
-          <span class="contact-link-value"><span class="__cf_email__" data-cfemail="3c4553494e7c59515d5550125f5351">[email&#160;protected]</span></span>
+          <span class="contact-link-value">your.email@example.com</span>
         </div>
       </a>
       <a href="https://linkedin.com/in/yourprofile" class="contact-link" target="_blank">
@@ -1028,21 +1028,10 @@
   </div>
   <div>
     <div class="section-label" style="margin-bottom:1.5rem">Send a Message</div>
-    <div class="contact-form">
-      <div class="form-group">
-        <label class="form-label">Your Name</label>
-        <input class="form-input" type="text" placeholder="John Smith">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Email Address</label>
-        <input class="form-input" type="email" placeholder="john@example.com">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Message</label>
-        <textarea class="form-textarea" placeholder="Tell me what you're working on..."></textarea>
-      </div>
-      <button class="btn-primary" style="width:fit-content;margin-top:0.5rem">Send Message</button>
-    </div>
+    <p style="color:rgba(200,224,240,0.4);font-size:0.88rem;font-weight:300;line-height:1.8;margin-bottom:1.5rem;max-width:380px">
+      Click below to open your email client with my address pre-filled. Tell me what you're working on — I'd love to hear from you.
+    </p>
+    <a href="mailto:your.email@example.com?subject=Hey%20Kieran%20—%20Let's%20Connect" class="btn-primary" style="width:fit-content;display:inline-block;text-decoration:none">Send Message ✉</a>
   </div>
 </section>
 
@@ -1053,103 +1042,95 @@
   <div class="footer-text">BUILT WITH CLAUDE &nbsp;|&nbsp; HOSTED ON NETLIFY</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 const canvas = document.getElementById('attackCanvas');
 const ctx    = canvas.getContext('2d');
+const dpr    = window.devicePixelRatio || 1;
 
 function resize() {
-  canvas.width  = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
+  const w = canvas.offsetWidth;
+  const h = canvas.offsetHeight;
+  canvas.width  = w * dpr;
+  canvas.height = h * dpr;
+  ctx.scale(dpr, dpr);
 }
 resize();
-window.addEventListener('resize', resize);
+window.addEventListener('resize', () => { resize(); if(typeof positionLabels==='function') positionLabels(); });
 
-/* ── Zoomed-out projection with padding ── */
+/* Projection: centered at -30W, locked 2:1 aspect ratio to prevent phone stretch */
 function project(lat, lng, W, H) {
-  const padX = 0.06;
-  const padY = 0.10;
-  const x = padX * W + (lng + 180) / 360 * W * (1 - 2 * padX);
-  const y = padY * H + (90  - lat) / 180 * H * (1 - 2 * padY);
+  const centerLng = -30;
+  let normLng = ((lng - centerLng + 540) % 360) - 180;
+  /* Map always 2:1 ratio, fitted to width, centered vertically */
+  const mapW = W;
+  const mapH = mapW / 2;
+  const offsetY = (H - mapH) / 2;
+  const x = (normLng + 180) / 360 * mapW;
+  const y = (90 - lat) / 180 * mapH + offsetY;
   return [x, y];
 }
 
-const CONTINENTS = [
-  [[70,-140],[72,-120],[68,-100],[60,-95],[55,-80],[50,-55],[47,-53],
-   [44,-66],[42,-70],[40,-74],[35,-75],[30,-81],[25,-80],[20,-87],
-   [15,-83],[8,-77],[8,-77],[10,-75],[15,-61],[18,-66],[22,-80],
-   [25,-80],[30,-81],[35,-75],[40,-74],[44,-66],[47,-53],[50,-60],
-   [55,-60],[60,-65],[65,-70],[68,-72],[70,-78],[72,-80],[72,-95],
-   [70,-100],[68,-110],[65,-125],[60,-138],[55,-130],[55,-165],
-   [60,-165],[65,-168],[68,-165],[70,-155],[70,-140]],
-  [[76,-73],[72,-55],[68,-53],[65,-52],[64,-50],[66,-36],[70,-22],
-   [76,-18],[80,-18],[83,-30],[83,-45],[80,-52],[76,-60],[76,-73]],
-  [[12,-72],[10,-62],[8,-60],[5,-52],[2,-50],[0,-50],[-5,-35],
-   [-10,-37],[-15,-39],[-20,-40],[-25,-48],[-30,-50],[-35,-58],
-   [-40,-62],[-45,-65],[-50,-68],[-55,-68],[-55,-64],[-50,-58],
-   [-45,-52],[-40,-50],[-35,-55],[-30,-50],[-25,-43],[-20,-40],
-   [-15,-39],[-10,-35],[-5,-35],[0,-50],[2,-50],[5,-52],[8,-60],
-   [10,-62],[12,-72]],
-  [[70,28],[68,20],[65,14],[62,6],[60,5],[58,5],[55,8],[54,10],
-   [52,5],[50,2],[48,-2],[46,-2],[43,-9],[36,-8],[36,5],[38,10],
-   [38,15],[40,18],[40,22],[40,28],[42,28],[44,28],[45,30],[46,24],
-   [48,22],[50,14],[52,14],[54,18],[55,21],[57,24],[58,26],[60,25],
-   [62,26],[65,26],[68,20],[70,28]],
-  [[58,5],[58,7],[60,5],[62,6],[64,12],[66,14],[68,18],[70,28],
-   [72,26],[74,20],[72,14],[70,14],[68,14],[66,12],[64,10],[62,8],[58,5]],
-  [[37,10],[35,12],[32,32],[28,34],[22,37],[15,42],[12,43],
-   [8,45],[2,42],[-5,40],[-10,38],[-20,35],[-26,33],[-30,30],
-   [-35,27],[-35,20],[-30,17],[-25,15],[-20,12],[-15,12],
-   [-10,15],[-5,10],[0,9],[5,2],[8,-3],[5,-5],[0,-8],
-   [-5,-8],[0,-15],[5,-15],[10,-13],[15,-17],[20,-17],
-   [25,-15],[30,-10],[33,0],[37,10]],
-  [[-13,49],[-16,50],[-20,48],[-24,44],[-26,44],[-22,48],[-18,48],[-13,49]],
-  [[70,30],[70,60],[68,58],[65,78],[60,100],[60,120],[55,130],
-   [52,142],[48,135],[45,135],[42,130],[38,122],[32,120],[28,121],
-   [25,120],[22,114],[20,110],[15,108],[10,104],[5,103],[8,98],
-   [15,95],[22,90],[26,90],[28,85],[22,80],[18,73],[22,68],
-   [25,62],[28,57],[22,58],[15,50],[12,45],[8,45],[15,42],
-   [22,37],[28,34],[32,32],[35,36],[38,40],[40,44],[42,50],
-   [45,48],[48,54],[52,58],[55,60],[58,62],[60,68],[65,68],
-   [68,58],[70,60],[70,30]],
-  [[8,77],[8,80],[10,80],[12,80],[15,80],[18,84],[22,88],[26,90],
-   [28,85],[25,80],[22,73],[18,73],[15,75],[12,77],[8,77]],
-  [[32,130],[34,131],[36,136],[38,141],[40,141],[44,145],[44,141],
-   [42,140],[40,140],[36,138],[34,132],[32,130]],
-  [[50,-5],[52,-4],[53,-3],[55,-2],[56,0],[58,0],[58,-4],
-   [55,-6],[53,-5],[52,-5],[50,-5]],
-  [[52,-10],[53,-9],[54,-8],[55,-7],[54,-6],[52,-8],[52,-10]],
-  [[-15,130],[-12,134],[-12,136],[-14,136],[-15,140],
-   [-18,145],[-22,150],[-28,154],[-32,152],[-35,150],
-   [-38,147],[-38,140],[-35,138],[-33,134],[-32,126],
-   [-22,114],[-18,122],[-15,128],[-15,130]],
-  [[-34,172],[-36,175],[-38,176],[-40,176],[-42,174],
-   [-44,170],[-44,168],[-42,170],[-40,172],[-38,177],[-34,172]],
-  [[0,108],[2,110],[4,108],[2,104],[0,104],[-2,108],[0,108]],
-  [[-5,105],[-6,108],[-8,112],[-8,115],[-6,112],[-5,105]],
-  [[-2,110],[-4,120],[-2,125],[0,120],[-2,110]],
-  [[20,-75],[22,-78],[22,-82],[20,-82],[20,-77],[20,-75]],
-  [[64,-24],[65,-22],[66,-18],[66,-14],[64,-13],[63,-16],[63,-20],[64,-24]],
-];
+/* ── Load real world coastlines from GeoJSON ── */
+let geoData = null;
+fetch('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson')
+  .then(r => r.json())
+  .then(data => { geoData = data.features; })
+  .catch(e => console.warn('GeoJSON load failed:', e));
+
+function drawRing(ring, W, H) {
+  /* GeoJSON coords are [lng, lat] */
+  if (ring.length < 3) return;
+  const [sx, sy] = project(ring[0][1], ring[0][0], W, H);
+  ctx.moveTo(sx, sy);
+  for (let i = 1; i < ring.length; i++) {
+    const [x, y] = project(ring[i][1], ring[i][0], W, H);
+    ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+}
+
+function drawCountries(W, H, mode) {
+  if (!geoData) return;
+  ctx.beginPath();
+  geoData.forEach(feature => {
+    const geom = feature.geometry;
+    if (geom.type === 'Polygon') {
+      geom.coordinates.forEach(ring => drawRing(ring, W, H));
+    } else if (geom.type === 'MultiPolygon') {
+      geom.coordinates.forEach(poly => {
+        poly.forEach(ring => drawRing(ring, W, H));
+      });
+    }
+  });
+  if (mode === 'fill') {
+    ctx.fillStyle = 'rgba(0,245,255,0.045)';
+    ctx.fill();
+  } else {
+    ctx.strokeStyle = 'rgba(0,245,255,0.28)';
+    ctx.lineWidth = 0.5;
+    ctx.stroke();
+  }
+}
 
 const ATTACK_PAIRS = [
-  { origin:{lat:39.9,lng:116.4,name:'BEIJING'},   target:{lat:38.9, lng:-77.0,  name:'D.C.'}         },
-  { origin:{lat:55.75,lng:37.6,name:'MOSCOW'},    target:{lat:40.7, lng:-74.0,  name:'NEW YORK'}     },
-  { origin:{lat:39.0,lng:125.8,name:'PYONGYANG'}, target:{lat:34.05,lng:-118.2, name:'L.A.'}         },
-  { origin:{lat:35.7,lng:51.4,name:'TEHRAN'},     target:{lat:41.85,lng:-87.65, name:'CHICAGO'}      },
-  { origin:{lat:1.35,lng:103.8,name:'SINGAPORE'}, target:{lat:47.6, lng:-122.3, name:'SEATTLE'}      },
-  { origin:{lat:6.5,lng:3.4,name:'LAGOS'},        target:{lat:25.77,lng:-80.19, name:'MIAMI'}        },
-  { origin:{lat:48.85,lng:2.35,name:'PARIS'},     target:{lat:42.36,lng:-71.06, name:'BOSTON'}       },
-  { origin:{lat:-23.5,lng:-46.6,name:'SÃO PAULO'},target:{lat:29.76,lng:-95.37, name:'HOUSTON'}      },
-  { origin:{lat:28.6,lng:77.2,name:'NEW DELHI'},  target:{lat:47.6, lng:-122.3, name:'SEATTLE'}      },
-  { origin:{lat:38.9,lng:-77.0,name:'D.C.'},      target:{lat:39.9, lng:116.4,  name:'BEIJING'}      },
-  { origin:{lat:38.9,lng:-77.0,name:'D.C.'},      target:{lat:55.75,lng:37.6,   name:'MOSCOW'}       },
-  { origin:{lat:40.7,lng:-74.0,name:'NEW YORK'},  target:{lat:35.7, lng:51.4,   name:'TEHRAN'}       },
-  { origin:{lat:47.6,lng:-122.3,name:'SEATTLE'},  target:{lat:39.0, lng:125.8,  name:'PYONGYANG'}    },
-  { origin:{lat:55.75,lng:37.6,name:'MOSCOW'},    target:{lat:48.85,lng:2.35,   name:'PARIS'}        },
-  { origin:{lat:39.9,lng:116.4,name:'BEIJING'},   target:{lat:35.7, lng:139.7,  name:'TOKYO'}        },
-  { origin:{lat:51.5,lng:-0.12,name:'LONDON'},    target:{lat:55.75,lng:37.6,   name:'MOSCOW'}       },
-  { origin:{lat:39.9,lng:116.4,name:'BEIJING'},   target:{lat:1.35, lng:103.8,  name:'SINGAPORE'}    },
-  { origin:{lat:35.7,lng:51.4,name:'TEHRAN'},     target:{lat:28.6, lng:77.2,   name:'NEW DELHI'}    },
+  { origin:{lat:39.9,lng:116.4}, target:{lat:38.9, lng:-77.0}  },
+  { origin:{lat:55.75,lng:37.6}, target:{lat:40.7, lng:-74.0}  },
+  { origin:{lat:39.0,lng:125.8}, target:{lat:34.05,lng:-118.2} },
+  { origin:{lat:35.7,lng:51.4},  target:{lat:41.85,lng:-87.65} },
+  { origin:{lat:1.35,lng:103.8}, target:{lat:47.6, lng:-122.3} },
+  { origin:{lat:6.5,lng:3.4},    target:{lat:25.77,lng:-80.19} },
+  { origin:{lat:48.85,lng:2.35}, target:{lat:42.36,lng:-71.06} },
+  { origin:{lat:-23.5,lng:-46.6},target:{lat:29.76,lng:-95.37} },
+  { origin:{lat:28.6,lng:77.2},  target:{lat:47.6, lng:-122.3} },
+  { origin:{lat:38.9,lng:-77.0}, target:{lat:39.9, lng:116.4}  },
+  { origin:{lat:38.9,lng:-77.0}, target:{lat:55.75,lng:37.6}   },
+  { origin:{lat:40.7,lng:-74.0}, target:{lat:35.7, lng:51.4}   },
+  { origin:{lat:47.6,lng:-122.3},target:{lat:39.0, lng:125.8}  },
+  { origin:{lat:55.75,lng:37.6}, target:{lat:48.85,lng:2.35}   },
+  { origin:{lat:39.9,lng:116.4}, target:{lat:35.7, lng:139.7}  },
+  { origin:{lat:51.5,lng:-0.12}, target:{lat:55.75,lng:37.6}   },
+  { origin:{lat:39.9,lng:116.4}, target:{lat:1.35, lng:103.8}  },
+  { origin:{lat:35.7,lng:51.4},  target:{lat:28.6, lng:77.2}   },
 ];
 
 const edgeGlows = [];
@@ -1176,45 +1157,33 @@ function bezier(p0, p1, p2, t) {
   return [mt*mt*p0[0]+2*mt*t*p1[0]+t*t*p2[0], mt*mt*p0[1]+2*mt*t*p1[1]+t*t*p2[1]];
 }
 
-function drawContinent(coords, W, H) {
-  ctx.beginPath();
-  const [sx,sy] = project(coords[0][0], coords[0][1], W, H);
-  ctx.moveTo(sx, sy);
-  for (let i = 1; i < coords.length; i++) {
-    const [x,y] = project(coords[i][0], coords[i][1], W, H);
-    ctx.lineTo(x, y);
-  }
-  ctx.closePath();
-}
-
 function draw() {
-  const W = canvas.width, H = canvas.height;
+  const W = canvas.offsetWidth, H = canvas.offsetHeight;
   ctx.clearRect(0, 0, W, H);
 
+  /* Grid */
   ctx.strokeStyle = 'rgba(0,245,255,0.025)';
   ctx.lineWidth = 0.5;
   for (let lat = -60; lat <= 80; lat += 30) {
     const [,y] = project(lat, 0, W, H);
     ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke();
   }
-  for (let lng = -150; lng <= 180; lng += 30) {
+  for (let lng = -180; lng <= 180; lng += 30) {
     const [x] = project(0, lng, W, H);
     ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke();
   }
 
-  CONTINENTS.forEach(coords => {
-    drawContinent(coords, W, H);
-    ctx.fillStyle = 'rgba(0,245,255,0.045)';
-    ctx.fill();
-  });
+  /* Fill countries */
+  drawCountries(W, H, 'fill');
 
+  /* Edge glows */
   edgeGlows.forEach(g => {
     const gx = g.px * W, gy = g.py * H;
     const r  = g.radius * Math.min(W, H);
     const alpha = (g.life / g.maxLife) * g.intensity;
     const grad = ctx.createRadialGradient(gx, gy, 0, gx, gy, r);
-    grad.addColorStop(0, `rgba(0,245,255,${alpha * 0.7})`);
-    grad.addColorStop(0.4, `rgba(0,245,255,${alpha * 0.3})`);
+    grad.addColorStop(0, 'rgba(0,245,255,'+(alpha*0.7)+')');
+    grad.addColorStop(0.4, 'rgba(0,245,255,'+(alpha*0.3)+')');
     grad.addColorStop(1, 'rgba(0,245,255,0)');
     ctx.beginPath(); ctx.arc(gx, gy, r, 0, Math.PI*2);
     ctx.fillStyle = grad; ctx.fill();
@@ -1224,54 +1193,52 @@ function draw() {
     if (edgeGlows[i].life <= 0) edgeGlows.splice(i, 1);
   }
 
-  CONTINENTS.forEach(coords => {
-    drawContinent(coords, W, H);
-    ctx.strokeStyle = 'rgba(0,245,255,0.28)';
-    ctx.lineWidth = 0.8;
-    ctx.stroke();
-  });
+  /* Stroke countries */
+  drawCountries(W, H, 'stroke');
 
+  /* Target city dots */
   [{lat:38.9,lng:-77.0},{lat:40.7,lng:-74.0},{lat:34.05,lng:-118.2},
    {lat:41.85,lng:-87.65},{lat:47.6,lng:-122.3},{lat:25.77,lng:-80.19},
    {lat:29.76,lng:-95.37},{lat:35.7,lng:139.7}
-  ].forEach(({lat,lng}) => {
-    const [x,y] = project(lat,lng,W,H);
-    ctx.beginPath(); ctx.arc(x,y,4,0,Math.PI*2);
+  ].forEach(function(c) {
+    const p = project(c.lat,c.lng,W,H);
+    ctx.beginPath(); ctx.arc(p[0],p[1],4,0,Math.PI*2);
     ctx.strokeStyle='rgba(0,245,255,0.3)'; ctx.lineWidth=1; ctx.stroke();
-    ctx.beginPath(); ctx.arc(x,y,1.8,0,Math.PI*2);
+    ctx.beginPath(); ctx.arc(p[0],p[1],1.8,0,Math.PI*2);
     ctx.fillStyle='rgba(0,245,255,0.75)'; ctx.fill();
   });
 
-  ATTACK_PAIRS.forEach(p => {
-    const [x,y] = project(p.origin.lat, p.origin.lng, W, H);
-    ctx.beginPath(); ctx.arc(x,y,2,0,Math.PI*2);
+  /* Origin city dots */
+  ATTACK_PAIRS.forEach(function(p) {
+    const pt = project(p.origin.lat, p.origin.lng, W, H);
+    ctx.beginPath(); ctx.arc(pt[0],pt[1],2,0,Math.PI*2);
     ctx.fillStyle='rgba(255,34,68,0.55)';
     ctx.shadowColor='#ff2244'; ctx.shadowBlur=4; ctx.fill(); ctx.shadowBlur=0;
   });
 
-  arcs.forEach(arc => {
+  /* Attack arcs */
+  arcs.forEach(function(arc) {
     if (arc.done) {
       if (arc.flash > 0) {
-        const [tx,ty] = project(arc.target.lat, arc.target.lng, W, H);
-        const a = arc.flash / 20;
+        var tp = project(arc.target.lat, arc.target.lng, W, H);
+        var a = arc.flash / 20;
         ctx.beginPath();
-        ctx.arc(tx,ty,(1-arc.flash/20)*14+3,0,Math.PI*2);
-        ctx.strokeStyle = arc.isRed ? `rgba(255,34,68,${a})` : `rgba(0,245,255,${a})`;
+        ctx.arc(tp[0],tp[1],(1-arc.flash/20)*14+3,0,Math.PI*2);
+        ctx.strokeStyle = arc.isRed ? 'rgba(255,34,68,'+a+')' : 'rgba(0,245,255,'+a+')';
         ctx.lineWidth=1.5; ctx.stroke();
         arc.flash--;
       }
       return;
     }
-
-    const [ox,oy] = project(arc.origin.lat, arc.origin.lng, W, H);
-    const [tx,ty] = project(arc.target.lat, arc.target.lng, W, H);
-    const mx=(ox+tx)/2, my=(oy+ty)/2 - Math.hypot(tx-ox,ty-oy)*0.36;
+    var op = project(arc.origin.lat, arc.origin.lng, W, H);
+    var tp = project(arc.target.lat, arc.target.lng, W, H);
+    var mx=(op[0]+tp[0])/2, my=(op[1]+tp[1])/2 - Math.hypot(tp[0]-op[0],tp[1]-op[1])*0.36;
 
     arc.t += arc.speed;
     if (arc.t >= 1) {
       arc.t = 1; arc.done = true; arc.flash = 20;
       edgeGlows.push({
-        px: tx/W, py: ty/H,
+        px: tp[0]/W, py: tp[1]/H,
         radius: 0.12 + Math.random()*0.08,
         intensity: 0.55 + Math.random()*0.35,
         life: 60 + Math.floor(Math.random()*40),
@@ -1279,72 +1246,55 @@ function draw() {
       });
     }
 
-    const [hx,hy] = bezier([ox,oy],[mx,my],[tx,ty],arc.t);
-    arc.trail.push([hx,hy]);
+    var hp = bezier([op[0],op[1]],[mx,my],[tp[0],tp[1]],arc.t);
+    arc.trail.push(hp);
     if (arc.trail.length > 28) arc.trail.shift();
 
-    const rgb = arc.isRed ? '255,34,68' : '0,245,255';
-    for (let j=1; j<arc.trail.length; j++) {
-      const a=(j/arc.trail.length)*0.75, w=(j/arc.trail.length)*2;
+    var rgb = arc.isRed ? '255,34,68' : '0,245,255';
+    for (var j=1; j<arc.trail.length; j++) {
+      var al=(j/arc.trail.length)*0.75, w=(j/arc.trail.length)*2;
       ctx.beginPath();
       ctx.moveTo(arc.trail[j-1][0],arc.trail[j-1][1]);
       ctx.lineTo(arc.trail[j][0],arc.trail[j][1]);
-      ctx.strokeStyle=`rgba(${rgb},${a})`; ctx.lineWidth=w; ctx.stroke();
+      ctx.strokeStyle='rgba('+rgb+','+al+')'; ctx.lineWidth=w; ctx.stroke();
     }
-    ctx.beginPath(); ctx.arc(hx,hy,2.5,0,Math.PI*2);
+    ctx.beginPath(); ctx.arc(hp[0],hp[1],2.5,0,Math.PI*2);
     ctx.fillStyle=arc.isRed?'#ff2244':'#00f5ff';
     ctx.shadowColor=arc.isRed?'#ff2244':'#00f5ff'; ctx.shadowBlur=7;
     ctx.fill(); ctx.shadowBlur=0;
   });
 
-  for (let i=arcs.length-1; i>=0; i--) {
+  for (var i=arcs.length-1; i>=0; i--) {
     if (arcs[i].done && arcs[i].flash<=0) arcs.splice(i,1);
   }
   while (arcs.length < MAX_ARCS) spawnArc();
-
   requestAnimationFrame(draw);
 }
 draw();
 
-// ── Cascading speed counter (10-15M range) ──
-let baseMillion = 10 + Math.floor(Math.random() * 5);
-let baseHundredK = Math.floor(Math.random() * 10);
-let d1 = Math.floor(Math.random() * 10);
-let d2 = Math.floor(Math.random() * 10);
-let d3 = Math.floor(Math.random() * 10);
-let d4 = Math.floor(Math.random() * 10);
-
-const counterEl = document.getElementById('threatCount');
-
+// Counter
+var baseMillion = 10 + Math.floor(Math.random() * 5);
+var baseHundredK = Math.floor(Math.random() * 10);
+var d1 = Math.floor(Math.random() * 10);
+var d2 = Math.floor(Math.random() * 10);
+var d3 = Math.floor(Math.random() * 10);
+var d4 = Math.floor(Math.random() * 10);
+var counterEl = document.getElementById('threatCount');
 function renderCount() {
   counterEl.textContent = baseMillion + ',' + baseHundredK + d1 + d2 + ',' + d3 + d4 + '0';
 }
-
-// Tens place — fast (every 80ms)
-setInterval(() => { d4 = Math.floor(Math.random() * 10); renderCount(); }, 80);
-
-// Hundreds place — medium-fast (every 400ms)
-setInterval(() => { d3 = Math.floor(Math.random() * 10); }, 400);
-
-// Thousands place — medium (every 2s)
-setInterval(() => { d2 = Math.floor(Math.random() * 10); }, 2000);
-
-// Ten-thousands place — slow (every 8s)
-setInterval(() => { d1 = Math.floor(Math.random() * 10); }, 8000);
-
-// Hundred-thousands — very slow (every 45s)
-setInterval(() => {
+setInterval(function() { d4 = Math.floor(Math.random() * 10); renderCount(); }, 80);
+setInterval(function() { d3 = Math.floor(Math.random() * 10); }, 400);
+setInterval(function() { d2 = Math.floor(Math.random() * 10); }, 2000);
+setInterval(function() { d1 = Math.floor(Math.random() * 10); }, 8000);
+setInterval(function() {
   baseHundredK += Math.random() < 0.5 ? 1 : 0;
-  if (baseHundredK > 9) {
-    baseHundredK = 0;
-    baseMillion = Math.min(15, baseMillion + 1);
-  }
+  if (baseHundredK > 9) { baseHundredK = 0; baseMillion = Math.min(15, baseMillion + 1); }
 }, 45000);
-
 renderCount();
 
-// ── City labels ──
-const labelData = [
+// City labels
+var labelData = [
   {name:'D.C.',      lat:38.9,  lng:-77.0,  type:'target'},
   {name:'NEW YORK',  lat:40.7,  lng:-74.0,  type:'target'},
   {name:'L.A.',      lat:34.05, lng:-118.2, type:'target'},
@@ -1357,28 +1307,27 @@ const labelData = [
 ];
 
 function positionLabels() {
-  const el = document.getElementById('mapLabels');
+  var el = document.getElementById('mapLabels');
   if (!el) return;
   el.innerHTML = '';
-  const W=canvas.offsetWidth, H=canvas.offsetHeight;
-  labelData.forEach(({name,lat,lng,type}) => {
-    const [x,y] = project(lat,lng,W,H);
-    const d = document.createElement('div');
-    d.className = 'map-label'+(type==='origin'?' origin':'');
-    d.textContent = name;
-    d.style.left = x+'px';
-    d.style.top  = (y-14)+'px';
-    el.appendChild(d);
+  var W=canvas.offsetWidth, H=canvas.offsetHeight;
+  labelData.forEach(function(d) {
+    var p = project(d.lat, d.lng, W, H);
+    var div = document.createElement('div');
+    div.className = 'map-label'+(d.type==='origin'?' origin':'');
+    div.textContent = d.name;
+    div.style.left = p[0]+'px';
+    div.style.top  = (p[1]-14)+'px';
+    el.appendChild(div);
   });
 }
 positionLabels();
-window.addEventListener('resize', positionLabels);
 
-// Mobile menu toggle
 function toggleMenu() {
   document.getElementById('hamburger').classList.toggle('active');
   document.getElementById('mobileMenu').classList.toggle('active');
 }
+
 </script>
 
 </body>
