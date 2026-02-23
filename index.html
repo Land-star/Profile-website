@@ -422,7 +422,7 @@
   }
   .cert-card:hover { background: var(--dim); }
   .cert-card:hover::before { transform: scaleX(1); }
-
+  .cert-featured::before { background: linear-gradient(90deg, var(--cyan), var(--green)) !important; }
   .cert-badge {
     width: 52px; height: 52px;
     border: 1px solid rgba(0,255,136,0.3);
@@ -878,11 +878,11 @@
     <div class="hero-stats">
       <div>
         <span class="stat-num">3</span>
-        <span class="stat-label">CompTIA Certs</span>
+        <span class="stat-label">Certifications</span>
       </div>
       <div>
-        <span class="stat-num">∞</span>
-        <span class="stat-label">More to Earn</span>
+        <span class="stat-num"></span>
+        <span class="stat-label">Currently Pursuing Additional Certifications</span>
       </div>
     </div>
   </div>
@@ -958,39 +958,44 @@
       <div class="cert-issuer">CompTIA</div>
       <div class="cert-name">Network+</div>
       <p class="cert-desc">Validates core networking skills including infrastructure design, protocols, troubleshooting, and network security concepts. Essential for anyone working in modern IT environments.</p>
-      <div class="cert-status">VERIFIED — EARNED MM/YYYY &nbsp;|&nbsp; EXPIRES MM/YYYY</div>
+      <div class="cert-status">VERIFIED — EARNED 12/2025 &nbsp;|&nbsp; EXPIRES 12/2028</div>
     </div>
-    <div class="cert-card" style="position:relative;">
-      <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--green))"></div>
+    <div class="cert-card cert-featured" style="position:relative;">
       <div class="cert-badge" style="border-color:rgba(0,245,255,0.4);background:rgba(0,245,255,0.08);color:var(--cyan)">CompTIA<br>Sec+</div>
       <div class="cert-issuer" style="color:rgba(0,245,255,0.6)">CompTIA</div>
       <div class="cert-name">Security+</div>
       <p class="cert-desc">The gold standard entry-level security certification. Covers threats, vulnerabilities, risk management, cryptography, and identity management. DoD-approved and globally recognized.</p>
-      <div class="cert-status">VERIFIED — EARNED MM/YYYY &nbsp;|&nbsp; EXPIRES MM/YYYY</div>
+      <div class="cert-status">VERIFIED — EARNED 12/2025 &nbsp;|&nbsp; EXPIRES 12/2028</div>
     </div>
     <div class="cert-card cert-incoming">
-      <div class="cert-badge" style="border-color:rgba(0,245,255,0.1);background:transparent;color:rgba(0,245,255,0.2)">NEXT<br>CERT</div>
+      <div class="cert-badge" style="border-color:rgba(0,245,255,0.1);background:transparent;color:rgba(0,245,255,0.2)">TRY HACK<br>ME</div>
+
       <div class="cert-issuer" style="color:rgba(200,224,240,0.2)">In Progress</div>
-      <div class="cert-name" style="color:rgba(200,224,240,0.3)">Coming Soon</div>
-      <p class="cert-desc">Currently studying and working toward the next certification. Check back soon.</p>
+      <div class="cert-name" style="color:rgba(200,224,240,0.3)">SAL1</div>
+      <p class="cert-desc">Security Analyst Level 1 (SAL1) is an entry-level cybersecurity certification that proves you can work as a SOC analyst (Security Operations Center analyst).</p>
       <div class="cert-status" style="color:rgba(0,245,255,0.3)">IN PROGRESS</div>
     </div>
     <div class="cert-card cert-incoming">
       <div class="cert-badge" style="border-color:rgba(0,245,255,0.1);background:transparent;color:rgba(0,245,255,0.2)">NEXT<br>CERT</div>
       <div class="cert-issuer" style="color:rgba(200,224,240,0.2)">Planned</div>
       <div class="cert-name" style="color:rgba(200,224,240,0.3)">On The Roadmap</div>
-      <p class="cert-desc">More certifications planned as the journey continues. The grind doesn't stop.</p>
+      <p class="cert-desc">More certifications planned.Come Back Soon</p>
       <div class="cert-status" style="color:rgba(0,245,255,0.3)">PLANNED</div>
     </div>
     <div class="cert-card cert-incoming">
       <div class="cert-badge" style="border-color:rgba(0,245,255,0.1);background:transparent;color:rgba(0,245,255,0.2)">NEXT<br>CERT</div>
+
       <div class="cert-issuer" style="color:rgba(200,224,240,0.2)">Planned</div>
       <div class="cert-name" style="color:rgba(200,224,240,0.3)">On The Roadmap</div>
-      <p class="cert-desc">Building a deep and wide certification stack to back up the hands-on work.</p>
+      <p class="cert-desc">More certifications planned, Come back Soon.</p>
       <div class="cert-status" style="color:rgba(0,245,255,0.3)">PLANNED</div>
     </div>
   </div>
 </section>
+
+
+
+
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
@@ -1001,25 +1006,25 @@
       Whether you're hiring, collaborating, or just want to talk security — my inbox is open. Actively looking for internships, junior roles, and interesting projects.
     </p>
     <div class="contact-links">
-      <a href="/cdn-cgi/l/email-protection#10697f65623e757d71797c507568717d607c753e737f7d" class="contact-link">
+      <a href="#" class="contact-link" id="emailLink">
         <div class="contact-link-icon">✉</div>
         <div>
           <span class="contact-link-label">Email</span>
-          <span class="contact-link-value"><span class="__cf_email__" data-cfemail="cab3a5bfb8e4afa7aba3a68aafb2aba7baa6afe4a9a5a7">[email&#160;protected]</span></span>
+          <span class="contact-link-value" id="emailDisplay"></span>
         </div>
       </a>
-      <a href="www.linkedin.com/in/kieran-rotheneder-8939b0268" class="contact-link" target="_blank">
+      <a href="https://www.linkedin.com/in/kieran-rotheneder-8939b0268" class="contact-link" target="_blank">
         <div class="contact-link-icon">in</div>
         <div>
           <span class="contact-link-label">LinkedIn</span>
-          <span class="contact-link-value">linkedin.com/in/yourprofile</span>
+          <span class="contact-link-value">Kieran Rotheneder</span>
         </div>
       </a>
       <a href="https://github.com/Land-star" class="contact-link" target="_blank">
         <div class="contact-link-icon">&lt;/&gt;</div>
         <div>
           <span class="contact-link-label">GitHub</span>
-          <span class="contact-link-value">github.com/yourusername</span>
+          <span class="contact-link-value">Landstar</span>
         </div>
       </a>
     </div>
@@ -1027,9 +1032,9 @@
   <div>
     <div class="section-label" style="margin-bottom:1.5rem">Send a Message</div>
     <p style="color:rgba(200,224,240,0.4);font-size:0.88rem;font-weight:300;line-height:1.8;margin-bottom:1.5rem;max-width:380px">
-      Click below to open your email client with my address pre-filled. Tell me what you're working on — I'd love to hear from you.
+      Have a question or want to work together? Fill out the form and I'll get back to you.
     </p>
-    <a href="/cdn-cgi/l/email-protection#9ce5f3e9eeb2f9f1fdf5f0dcf9e4fdf1ecf0f9b2fff3f1a3efe9fef6f9ffe8a1d4f9e5b9aeacd7f5f9eefdf2b9aeac7e1c08b9aeacd0f9e8bbefb9aeacdff3f2f2f9ffe8" class="btn-primary" style="width:fit-content;display:inline-block;text-decoration:none">Send Message ✉</a>
+    <a href="https://forms.gle/RRHtLZFJTv81PKJX6" target="_blank" class="btn-primary" style="width:fit-content;display:inline-block;text-decoration:none">Send Message ✉</a>
   </div>
 </section>
 
@@ -1040,7 +1045,11 @@
   <div class="footer-text">BUILT WITH CLAUDE &nbsp;|&nbsp; HOSTED ON NETLIFY</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+var u='contact',d='kieran-tech.com';
+document.getElementById('emailLink').href='mailto:'+u+'@'+d;
+document.getElementById('emailDisplay').textContent=u+'@'+d;
+
 const canvas = document.getElementById('attackCanvas');
 const ctx    = canvas.getContext('2d');
 const dpr    = window.devicePixelRatio || 1;
@@ -1059,7 +1068,6 @@ window.addEventListener('resize', () => { resize(); if(typeof positionLabels==='
 function project(lat, lng, W, H) {
   const centerLng = -30;
   let normLng = ((lng - centerLng + 540) % 360) - 180;
-  /* Map always 2:1 ratio, fitted to width, centered vertically */
   const mapW = W;
   const mapH = mapW / 2;
   const offsetY = (H - mapH) / 2;
@@ -1068,7 +1076,6 @@ function project(lat, lng, W, H) {
   return [x, y];
 }
 
-/* ── Load real world coastlines from GeoJSON ── */
 let geoData = null;
 fetch('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson')
   .then(r => r.json())
@@ -1076,7 +1083,6 @@ fetch('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/wor
   .catch(e => console.warn('GeoJSON load failed:', e));
 
 function drawRing(ring, W, H) {
-  /* GeoJSON coords are [lng, lat] */
   if (ring.length < 3) return;
   const [sx, sy] = project(ring[0][1], ring[0][0], W, H);
   ctx.moveTo(sx, sy);
@@ -1159,7 +1165,6 @@ function draw() {
   const W = canvas.offsetWidth, H = canvas.offsetHeight;
   ctx.clearRect(0, 0, W, H);
 
-  /* Grid */
   ctx.strokeStyle = 'rgba(0,245,255,0.025)';
   ctx.lineWidth = 0.5;
   for (let lat = -60; lat <= 80; lat += 30) {
@@ -1171,10 +1176,8 @@ function draw() {
     ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,H); ctx.stroke();
   }
 
-  /* Fill countries */
   drawCountries(W, H, 'fill');
 
-  /* Edge glows */
   edgeGlows.forEach(g => {
     const gx = g.px * W, gy = g.py * H;
     const r  = g.radius * Math.min(W, H);
@@ -1191,10 +1194,8 @@ function draw() {
     if (edgeGlows[i].life <= 0) edgeGlows.splice(i, 1);
   }
 
-  /* Stroke countries */
   drawCountries(W, H, 'stroke');
 
-  /* Target city dots */
   [{lat:38.9,lng:-77.0},{lat:40.7,lng:-74.0},{lat:34.05,lng:-118.2},
    {lat:41.85,lng:-87.65},{lat:47.6,lng:-122.3},{lat:25.77,lng:-80.19},
    {lat:29.76,lng:-95.37},{lat:35.7,lng:139.7}
@@ -1206,7 +1207,6 @@ function draw() {
     ctx.fillStyle='rgba(0,245,255,0.75)'; ctx.fill();
   });
 
-  /* Origin city dots */
   ATTACK_PAIRS.forEach(function(p) {
     const pt = project(p.origin.lat, p.origin.lng, W, H);
     ctx.beginPath(); ctx.arc(pt[0],pt[1],2,0,Math.PI*2);
@@ -1214,7 +1214,6 @@ function draw() {
     ctx.shadowColor='#ff2244'; ctx.shadowBlur=4; ctx.fill(); ctx.shadowBlur=0;
   });
 
-  /* Attack arcs */
   arcs.forEach(function(arc) {
     if (arc.done) {
       if (arc.flash > 0) {
@@ -1270,7 +1269,6 @@ function draw() {
 }
 draw();
 
-// Counter
 var baseMillion = 10 + Math.floor(Math.random() * 5);
 var baseHundredK = Math.floor(Math.random() * 10);
 var d1 = Math.floor(Math.random() * 10);
@@ -1291,7 +1289,6 @@ setInterval(function() {
 }, 45000);
 renderCount();
 
-// City labels
 var labelData = [
   {name:'D.C.',      lat:38.9,  lng:-77.0,  type:'target'},
   {name:'NEW YORK',  lat:40.7,  lng:-74.0,  type:'target'},
