@@ -411,25 +411,63 @@
     box-shadow: var(--glow-cyan);
   }
 
-  /* ===== EMPTY STATE / COMING SOON ===== */
-  .more-coming {
+  /* ===== COMING SOON CARD (matches cert-incoming style) ===== */
+  .project-card.coming-soon {
+    border: 1px dashed rgba(0,245,255,0.12);
     background: transparent;
-    border: 1px dashed rgba(0,245,255,0.08);
-    padding: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 0.5rem;
+    cursor: default;
+    pointer-events: none;
     margin-top: 1.5px;
   }
-  .more-coming span {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 0.72rem;
-    color: rgba(200,224,240,0.18);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+  .project-card.coming-soon:hover { background: transparent; }
+  .project-card.coming-soon::before { display: none; }
+  .project-card.coming-soon .project-month,
+  .project-card.coming-soon .project-year {
+    color: rgba(0,245,255,0.15);
+    text-shadow: none;
   }
+  .project-card.coming-soon .project-type {
+    border-color: rgba(0,245,255,0.1);
+    color: rgba(200,224,240,0.2);
+  }
+  .project-card.coming-soon .project-num { color: rgba(200,224,240,0.1); }
+  .project-card.coming-soon .project-name { color: rgba(200,224,240,0.3); }
+  .project-card.coming-soon:hover .project-name { color: rgba(200,224,240,0.3); }
+  .project-card.coming-soon .project-desc { color: rgba(200,224,240,0.18); }
+  .project-card.coming-soon .project-tag {
+    background: transparent;
+    border-color: rgba(0,245,255,0.06);
+    color: rgba(0,245,255,0.15);
+  }
+  .project-card.coming-soon .project-arrow {
+    border-color: rgba(0,245,255,0.06);
+    color: rgba(0,245,255,0.1);
+  }
+  .project-card.coming-soon:hover .project-arrow {
+    border-color: rgba(0,245,255,0.06);
+    color: rgba(0,245,255,0.1);
+    box-shadow: none;
+  }
+  .coming-soon-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.58rem;
+    color: rgba(0,245,255,0.25);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 0.15rem;
+  }
+  .coming-soon-status::before {
+    content: '';
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(0,245,255,0.2);
+    box-shadow: 0 0 8px rgba(0,245,255,0.15);
+    animation: blink 2.5s ease infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
   /* ===== FOOTER ===== */
   footer {
@@ -517,7 +555,7 @@
       Everything I've built, broken, and written about. Home labs, CTF writeups, security research, and articles on developing tech — sorted newest first.
     </p>
     <div class="project-count">
-      <span class="num">03</span>
+      <span class="num">00</span>
       <span>PROJECTS</span>
     </div>
   </div>
@@ -529,75 +567,70 @@
 
   <div class="projects-list">
 
-    <!-- PROJECT 3 (newest) -->
-    <a href="project-3.html" class="project-card">
+    <!--
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  HOW TO ADD A NEW PROJECT                                    ║
+    ║                                                              ║
+    ║  1. Copy the template below                                  ║
+    ║  2. Paste it RIGHT HERE (above the Coming Soon card)         ║
+    ║  3. Fill in your details                                     ║
+    ║  4. Update the project count number in the header above      ║
+    ║  5. Newest projects go at the TOP                            ║
+    ║                                                              ║
+    ║  TYPE OPTIONS (swap the class):                              ║
+    ║    "project-type lab"      → green (Home Lab)                ║
+    ║    "project-type ctf"      → red   (CTF / Challenge)         ║
+    ║    "project-type article"  → gray  (Article / Thought Piece) ║
+    ║    "project-type research" → cyan  (Research)                ║
+    ╚══════════════════════════════════════════════════════════════╝
+
+    TEMPLATE — COPY FROM HERE ↓
+    ─────────────────────────────────────────
+
+    <a href="YOUR-LINK.html" class="project-card">
       <div class="project-date-col">
         <span class="project-month">MMM</span>
         <span class="project-year">2025</span>
-      </div>
-      <div class="project-info">
-        <div class="project-type-row">
-          <span class="project-type article">Article / Thought Piece</span>
-          <span class="project-num">03</span>
-        </div>
-        <div class="project-name">YOUR ARTICLE TITLE HERE</div>
-        <p class="project-desc">Thoughts on a developing technology, an emerging threat, or where the industry is heading. Replace this with your actual article summary.</p>
-        <div class="project-tags">
-          <span class="project-tag">Topic</span>
-          <span class="project-tag">Topic</span>
-        </div>
-      </div>
-      <div class="project-arrow">→</div>
-    </a>
-
-    <!-- PROJECT 2 -->
-    <a href="project-2.html" class="project-card">
-      <div class="project-date-col">
-        <span class="project-month">MMM</span>
-        <span class="project-year">2025</span>
-      </div>
-      <div class="project-info">
-        <div class="project-type-row">
-          <span class="project-type ctf">CTF / Challenge</span>
-          <span class="project-num">02</span>
-        </div>
-        <div class="project-name">YOUR CTF WRITEUP TITLE HERE</div>
-        <p class="project-desc">A CTF writeup showing your problem-solving approach, the tools you used, and what you learned. Replace with your actual writeup summary.</p>
-        <div class="project-tags">
-          <span class="project-tag">Tool / Tech</span>
-          <span class="project-tag">Tool / Tech</span>
-        </div>
-      </div>
-      <div class="project-arrow">→</div>
-    </a>
-
-    <!-- PROJECT 1 (oldest) -->
-    <a href="project-1.html" class="project-card">
-      <div class="project-date-col">
-        <span class="project-month">MMM</span>
-        <span class="project-year">2024</span>
       </div>
       <div class="project-info">
         <div class="project-type-row">
           <span class="project-type lab">Home Lab</span>
           <span class="project-num">01</span>
         </div>
-        <div class="project-name">YOUR HOME LAB TITLE HERE</div>
-        <p class="project-desc">Describe what you built, the tools and tech involved, and what you learned. Home lab setups show initiative and hands-on experience.</p>
+        <div class="project-name">YOUR PROJECT TITLE</div>
+        <p class="project-desc">A short description of what you built, broke, or wrote about.</p>
         <div class="project-tags">
-          <span class="project-tag">Tool / Tech</span>
-          <span class="project-tag">Tool / Tech</span>
-          <span class="project-tag">Tool / Tech</span>
+          <span class="project-tag">Tool</span>
+          <span class="project-tag">Tech</span>
         </div>
       </div>
       <div class="project-arrow">→</div>
     </a>
 
-  </div>
+    ───────────────────────────────────────── 
+    END TEMPLATE — COPY UP TO HERE ↑
+    -->
 
-  <div class="more-coming">
-    <span>+ More projects coming soon</span>
-    <span style="font-size:0.6rem;opacity:0.5">always building</span>
+    <!-- ═══ ADD YOUR PROJECTS ABOVE THIS LINE ═══ -->
+
+    <!-- COMING SOON — always stays last -->
+    <div class="project-card coming-soon">
+      <div class="project-date-col">
+        <span class="project-month">TBD</span>
+        <span class="project-year">—</span>
+      </div>
+      <div class="project-info">
+        <div class="project-type-row">
+          <span class="project-type">In Progress</span>
+          <span class="project-num">NEXT</span>
+        </div>
+        <div class="project-name">COMING SOON</div>
+        <p class="project-desc">Currently working on the next project. Check back soon — the grind doesn't stop.</p>
+        <div class="coming-soon-status">IN PROGRESS</div>
+      </div>
+      <div class="project-arrow">—</div>
+    </div>
+
   </div>
 </div>
 
