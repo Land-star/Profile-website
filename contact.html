@@ -39,7 +39,7 @@
   .nav-cta { font-family: 'Orbitron', monospace; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; padding: 0.55rem 1.4rem; border: 1px solid var(--cyan); color: var(--cyan); background: transparent; text-decoration: none; text-transform: uppercase; position: relative; overflow: hidden; transition: color 0.3s; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%); }
   .nav-cta::before { content: ''; position: absolute; inset: 0; background: var(--cyan); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; z-index: -1; }
   .nav-cta:hover { color: var(--bg); }
-  .nav-cta:hover::before { transform: scaleX(1); }
+  .nav-cta:hover::before { transform: scaleX(1); } .nav-cta.active { color: var(--bg); } .nav-cta.active::before { transform: scaleX(1); } .nav-cta.active::after { content: ''; position: absolute; bottom: -6px; left: 0; right: 0; height: 2px; background: var(--cyan); box-shadow: var(--glow-cyan); }
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 210; padding: 4px; }
   .hamburger span { width: 22px; height: 1.5px; background: var(--cyan); transition: all 0.3s; display: block; }
   .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px,4px); }
@@ -218,7 +218,7 @@
     <li><a href="certifications.html">Certifications</a></li>
     <li><a href="projects.html">Projects</a></li>
   </ul>
-  <a href="contact.html" class="nav-cta">Contact</a>
+  <a href="contact.html" class="nav-cta active">Contact</a>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
