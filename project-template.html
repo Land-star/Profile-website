@@ -14,6 +14,7 @@
     --cyan: #00f5ff;
     --green: #00ff88;
     --red: #ff2244;
+    --amber: #ffaa00;
     --dim: #0a1628;
     --border: rgba(0,245,255,0.15);
     --text: #c8e0f0;
@@ -218,6 +219,14 @@
     flex-wrap: wrap;
   }
 
+  /*
+    ===== PROJECT TYPE TAG COLORS =====
+    Change the class on <span class="project-type"> to match the project:
+
+      class="project-type lab"     → GREEN  — Home Lab projects
+      class="project-type ctf"     → RED    — Hacking / CTF projects
+      class="project-type article" → AMBER  — Reports / write-ups
+  */
   .project-type {
     display: inline-block;
     font-family: 'Share Tech Mono', monospace;
@@ -228,9 +237,9 @@
     color: var(--cyan);
     text-transform: uppercase;
   }
-  .project-type.lab { border-color: rgba(0,255,136,0.25); color: var(--green); }
-  .project-type.ctf { border-color: rgba(255,34,68,0.25); color: var(--red); }
-  .project-type.article { border-color: rgba(200,224,240,0.15); color: rgba(200,224,240,0.5); }
+  .project-type.lab     { border-color: rgba(0,255,136,0.25);  color: var(--green); }
+  .project-type.ctf     { border-color: rgba(255,34,68,0.25);  color: var(--red);   }
+  .project-type.article { border-color: rgba(255,170,0,0.25);  color: var(--amber); }
 
   .project-date {
     font-family: 'Share Tech Mono', monospace;
@@ -441,8 +450,7 @@
     .hamburger { display: flex; }
 
     .project-header-inner { padding: 4rem 1.5rem 3rem; }
-    .project-content {
-    margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+    .project-content { margin: 0 auto; padding: 3rem 1.5rem 4rem; }
     .project-nav { grid-template-columns: 1fr; }
 
     footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 2rem 1.5rem; }
@@ -453,14 +461,14 @@
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="logo">KIERAN <span>// SECURITY</span></a>
+  <a href="/index.html" class="logo">KIERAN <span>// SECURITY</span></a>
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="certifications.html">Certifications</a></li>
-    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/certifications.html">Certifications</a></li>
+    <li><a href="/projects.html" class="active">Projects</a></li>
   </ul>
-  <a href="contact.html" class="nav-cta">Contact</a>
+  <a href="/contact.html" class="nav-cta">Contact</a>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </div>
@@ -468,26 +476,31 @@
 
 <!-- Mobile menu -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html" onclick="toggleMenu()">Home</a>
-  <a href="about.html" onclick="toggleMenu()">About</a>
-  <a href="certifications.html" onclick="toggleMenu()">Certifications</a>
-  <a href="projects.html" onclick="toggleMenu()">Projects</a>
-  <a href="contact.html" onclick="toggleMenu()" style="color:var(--cyan);padding-top:0.6rem;">Contact</a>
+  <a href="/index.html" onclick="toggleMenu()">Home</a>
+  <a href="/about.html" onclick="toggleMenu()">About</a>
+  <a href="/certifications.html" onclick="toggleMenu()">Certifications</a>
+  <a href="/projects.html" onclick="toggleMenu()">Projects</a>
+  <a href="/contact.html" onclick="toggleMenu()" style="color:var(--cyan);padding-top:0.6rem;">Contact</a>
 </div>
 
 <!-- PROJECT HEADER -->
 <div class="project-header">
   <div class="project-header-inner">
     <div class="breadcrumb">
-      <a href="index.html">Home</a>
+      <a href="/index.html">Home</a>
       <span class="sep">/</span>
-      <a href="projects.html">Projects</a>
+      <a href="/projects.html">Projects</a>
       <span class="sep">/</span>
       <span class="current">Project Title</span>
     </div>
 
     <div class="project-meta">
-      <!-- Change the class to: lab, ctf, article, or research -->
+      <!--
+        TAG TYPE — change the class to match the project:
+          class="project-type lab"     → GREEN  (Home Lab)
+          class="project-type ctf"     → RED    (Hacking / CTF)
+          class="project-type article" → AMBER  (Report / Write-up)
+      -->
       <span class="project-type lab">Home Lab</span>
       <span class="project-date">MMM YYYY</span>
     </div>
@@ -556,16 +569,36 @@ sudo wireshark -i eth0 -k</code></pre>
 
 </div>
 
-<!-- PREV / NEXT NAV -->
+<!-- ============================================================
+  PREV / NEXT PROJECT NAV
+  ============================================================
+
+  PREVIOUS LINK — always enabled (every project has one before it).
+  ⚠️  AI INSTRUCTION: Ask Kieran for the folder/file path to the
+      previous project before editing the href and title below.
+
+  NEXT LINK — disabled by default ("Coming Soon").
+  When the next project is ready, make these THREE changes:
+    1. Replace  href="#"  with the real path
+       e.g.  href="/my-next-project/index.html"
+    2. Replace the title text  Coming Soon  with the real project name
+    3. Delete the word  disabled  from  class="project-nav-link next disabled"
+  That's it — the link will activate automatically.
+  ============================================================ -->
 <div class="project-nav">
-  <a href="#" class="project-nav-link prev disabled">
+
+  <!-- PREVIOUS: AI — ask Kieran for the correct path before filling in href and title -->
+  <a href="/PREVIOUS-PROJECT-FOLDER/index.html" class="project-nav-link prev">
     <span class="project-nav-label">← Previous Project</span>
-    <span class="project-nav-title">—</span>
+    <span class="project-nav-title">Previous Project Title</span>
   </a>
-  <a href="project-2.html" class="project-nav-link next">
+
+  <!-- NEXT: see the three steps above when ready to activate -->
+  <a href="#" class="project-nav-link next disabled">
     <span class="project-nav-label">Next Project →</span>
-    <span class="project-nav-title">Your Next Project Title</span>
+    <span class="project-nav-title">Coming Soon</span>
   </a>
+
 </div>
 
 <!-- FOOTER -->
