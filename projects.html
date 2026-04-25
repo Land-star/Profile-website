@@ -14,6 +14,7 @@
     --cyan: #00f5ff;
     --green: #00ff88;
     --red: #ff2244;
+    --amber: #ffaa00;
     --dim: #0a1628;
     --border: rgba(0,245,255,0.15);
     --text: #c8e0f0;
@@ -354,6 +355,7 @@
   .project-type.ctf { border-color: rgba(255,34,68,0.25); color: var(--red); }
   .project-type.article { border-color: rgba(200,224,240,0.15); color: rgba(200,224,240,0.5); }
   .project-type.research { border-color: rgba(0,245,255,0.2); color: var(--cyan); }
+  .project-type.report { border-color: rgba(255,170,0,0.3); color: var(--amber); }
 
   .project-num {
     font-family: 'Share Tech Mono', monospace;
@@ -557,7 +559,7 @@
       Everything I've built, broken, and written about. Home labs, CTF writeups, security research, and articles on developing tech — sorted newest first.
     </p>
     <div class="project-count">
-      <span class="num">02</span>
+      <span class="num">03</span>
       <span>PROJECTS</span>
     </div>
   </div>
@@ -580,10 +582,11 @@
     ║  5. Newest projects go at the TOP                            ║
     ║                                                              ║
     ║  TYPE OPTIONS (swap the class):                              ║
-    ║    "project-type lab"      → green (Home Lab)                ║
-    ║    "project-type ctf"      → red   (CTF / Challenge)         ║
-    ║    "project-type article"  → gray  (Article / Thought Piece) ║
-    ║    "project-type research" → cyan  (Research)                ║
+    ║    "project-type lab"      → green  (Home Lab)               ║
+    ║    "project-type ctf"      → red    (CTF / Challenge)        ║
+    ║    "project-type article"  → gray   (Article / Thought Piece)║
+    ║    "project-type research" → cyan   (Research)               ║
+    ║    "project-type report"   → amber  (Report / Write-up)      ║
     ╚══════════════════════════════════════════════════════════════╝
 
     TEMPLATE — COPY FROM HERE ↓
@@ -612,6 +615,32 @@
     ───────────────────────────────────────── 
     END TEMPLATE — COPY UP TO HERE ↑
     -->
+
+    <!-- PROJECT 03 -->
+    <a href="project-medical-office-security.html" class="project-card">
+      <div class="project-date-col">
+        <span class="project-month">APR</span>
+        <span class="project-year">2026</span>
+      </div>
+      <div class="project-info">
+        <div class="project-type-row">
+          <span class="project-type report">Report</span>
+          <span class="project-num">03</span>
+        </div>
+        <div class="project-name">MEDICAL OFFICE SECURITY REPORT</div>
+        <p class="project-desc">A cybersecurity report written for a small medical office scenario. Covers threat identification and mitigation, network design, ransomware defense, cryptography, OS hardening, and authentication — with HIPAA compliance as a central focus throughout.</p>
+        <div class="project-tags">
+          <span class="project-tag">HIPAA</span>
+          <span class="project-tag">Network Design</span>
+          <span class="project-tag">Threat Modeling</span>
+          <span class="project-tag">Cryptography</span>
+          <span class="project-tag">OS Hardening</span>
+          <span class="project-tag">VLANs</span>
+          <span class="project-tag">Authentication</span>
+        </div>
+      </div>
+      <div class="project-arrow">→</div>
+    </a>
 
     <!-- PROJECT 02 -->
     <a href="Project 2/project-router-segmentation.html" class="project-card">
