@@ -200,19 +200,59 @@
     background: linear-gradient(90deg, var(--yellow), rgba(255,217,74,0.0));
   }
 
+  .edu-card.completed {
+    border: 1px solid rgba(255,205,60,0.4);
+    background: linear-gradient(135deg, rgba(255,205,60,0.07), var(--surface) 40%);
+    box-shadow: 0 0 30px rgba(255,205,60,0.08), inset 0 0 40px rgba(255,205,60,0.03);
+  }
+  .edu-card.completed:hover { background: linear-gradient(135deg, rgba(255,205,60,0.1), var(--dim) 40%); }
+
+  .edu-card.completed::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(115deg, transparent 25%, rgba(255,235,150,0.16) 42%, rgba(255,215,80,0.32) 50%, rgba(255,235,150,0.16) 58%, transparent 75%);
+    background-repeat: no-repeat;
+    background-size: 200% 200%;
+    background-position: -150% -150%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .edu-card.completed.shine::before {
+    animation: goldSweep 2.4s ease-out 1 forwards;
+  }
+  @keyframes goldSweep {
+    0% { background-position: -150% -150%; }
+    100% { background-position: 150% 150%; }
+  }
+
+  .edu-card.completed .edu-card-inner { position: relative; z-index: 2; }
+
+  .edu-card.completed::after { color: rgba(255,215,80,0.06); }
+
   .edu-card.completed .edu-accent-bar {
-    background: linear-gradient(90deg, var(--green), var(--cyan));
+    height: 4px;
+    background: linear-gradient(90deg, #b8860b, #ffd94a, #fff6d0, #ffd94a, #b8860b);
+    background-size: 200% 100%;
+    animation: goldBarShift 3s linear infinite;
+  }
+  @keyframes goldBarShift {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
   }
 
   .edu-card.completed .status-word {
-    border-color: rgba(0,255,136,0.3);
-    color: var(--green);
+    border-color: rgba(255,215,80,0.4);
+    color: #ffd94a;
   }
 
   .edu-card.completed .status-dot {
-    background: var(--green);
-    box-shadow: 0 0 10px rgba(0,255,136,0.7);
+    background: #ffd94a;
+    box-shadow: 0 0 10px rgba(255,215,80,0.8);
   }
+
+  .edu-card.completed .edu-institution { color: rgba(255,225,150,0.65); }
+
+  .edu-card.completed .edu-stat-num { color: #ffd94a; text-shadow: 0 0 14px rgba(255,215,80,0.4); }
 
   .edu-card-inner {
     display: grid;
@@ -688,7 +728,7 @@
           <span class="edu-stat-label">GPA</span>
         </div>
         <div>
-          <span class="edu-stat-num" style="font-size:1.1rem;color:var(--green)">2026</span>
+          <span class="edu-stat-num" style="font-size:1.1rem">2026</span>
           <span class="edu-stat-label">Conferred</span>
         </div>
         <div>
@@ -845,6 +885,17 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.1 });
 revealEls.forEach(el => observer.observe(el));
+
+const shineEls = document.querySelectorAll('.edu-card.completed');
+const shineObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('shine');
+      shineObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+shineEls.forEach(el => shineObserver.observe(el));
 </script>
 </body>
 </html>
